@@ -21,8 +21,10 @@ class StoreService {
         return store
     }
 
-    public static async getAllStores() {
+    public static async getAllStores(page: number = 1, limit: number = 10) {
         const stores = await prisma.store.findMany({
+            take: limit,
+            skip: (page - 1) * limit,
             orderBy: {
                 createdAt: "desc"
             }   
