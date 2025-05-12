@@ -1,0 +1,148 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id        Int     @id @default(autoincrement())
+  name      String
+  email     String  @unique
+  password  String
+  role      Role    @default(ADMIN)
+  isActive  Boolean @default(true)
+  longitude Float?
+  latitude  Float?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  SUPER_ADMIN
+  ADMIN
+}
+
+// Employee Model
+model Employee {
+  id                   Int          @id @default(autoincrement())
+  prefix               String
+  firstName            String
+  lastName             String
+  email                String       @unique
+  userName             String       @unique
+  password             String
+  accessStores         Store[]      @relation("EmployeeAccessStores")
+  dateOfBirth          DateTime
+  gender               Gender       @default(MALE)
+  bloodGroup           String?
+  phone                String
+  alternatePhoneNumber String?
+  familyPhoneNumber    String?
+  twitterLink          String?
+  faceBookLink         String?
+  instagramLink        String?
+  guardian             String?
+  aadharNumber         String
+  panNumber            String
+  permanentAddress     String
+  currentAddress       String
+  accountHolderName    String
+  accountNumber        String
+  bankName             String
+  IFSC_code            String
+  bankBranch           String
+  taxPayerId           String?
+  primaryWorkLocation  String?
+  basicSalary          String
+  salaryType           SalaryType   @default(MONTHLY)
+  payComponent         String?
+  role                 Role
+  hireDate             DateTime
+  isActive             Boolean      @default(true)
+  employeeRoleId       Int
+  employeeRole         EmployeeRole @relation(fields: [employeeRoleId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// enum
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum SalaryType {
+  MONTHLY
+  HOURLY
+}
+
+// Store Model
+model Store {
+  id                        Int         @id @default(autoincrement())
+  name                      String
+  address                   String
+  city                      String
+  state                     String
+  country                   String
+  pincode                   String
+  contactNumber             String
+  email                     String
+  isActive                  Boolean     @default(true)
+  isOpen                    Boolean     @default(true)
+  isOnlineDeliveryAvailable Boolean     @default(true)
+  status                    StoreStatus @default(ACTIVE)
+  type                      StoreType   @default(FRANCHISE)
+  latitude                  Float?
+  longitude                 Float?
+  createdAt                 DateTime    @default(now())
+  updatedAt                 DateTime    @updatedAt
+
+  // Relations
+  employees Employee[] @relation("EmployeeAccessStores")
+}
+
+// Enumm
+enum StoreType {
+  FRANCHISE
+  COMPANY_OWNED
+  OTHER
+}
+
+enum StoreStatus {
+  ACTIVE
+  CLOSED
+  UNDER_MAINTENANCE
+}
+
+model EmployeeRole {
+  id         Int          @id @default(autoincrement())
+  roleName   String       @unique
+  permission Permission[] @relation("employeeRoles")
+
+  employeeRole Employee[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Permission {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  employeeRole EmployeeRole[] @relation("employeeRoles")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

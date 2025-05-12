@@ -1,0 +1,48 @@
+import { StoreService } from "../services";
+import { statusCode } from "../types/types";
+import { ErrorResponse } from "../utils";
+import { asyncHandler } from "../utils/asyncHandler";
+import { SuccessResponse } from "../utils/response.util";
+import { zodError } from "../validators";
+import { storeValidator } from "../validators/store.validator";
+
+export const createStore = asyncHandler(async (request, reply) => {
+  const result = storeValidator.safeParse(request.body);
+  if (!result.success) {
+    const formattedError = zodError(result.error);
+    return reply.status(statusCode.Bad_Request).send({
+      success: false,
+      message: "Validation Error",
+      errors: formattedError,
+    });
+  }
+
+  const data = result.data;
+
+  // Check for duplicate email or contactNumber (example validations)
+  const existingStore = await StoreService.findByEmailorContact(
+    data.email,
+    data.contactNumber
+  );
+  if (existingStore) {
+    throw new ErrorResponse(
+      "Store with given email or contact number already exists",
+      statusCode.Conflict
+    );
+  }
+
+  // Create the store
+  const store = await StoreService.create(data);
+
+  return SuccessResponse(
+    reply,
+    "Store created successfully",
+    store,
+    statusCode.Created
+  );
+});
+
+export const getAllStores = asyncHandler(async (request, reply) => {
+  const stores = await StoreService.getAllStores();
+  return SuccessResponse(reply, "Stores fetched successfully", stores);
+});
