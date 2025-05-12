@@ -67,7 +67,6 @@ model Employee {
   basicSalary          String
   salaryType           SalaryType   @default(MONTHLY)
   payComponent         String?
-  role                 Role
   hireDate             DateTime
   isActive             Boolean      @default(true)
   employeeRoleId       Int

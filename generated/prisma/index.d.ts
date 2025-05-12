@@ -2426,7 +2426,6 @@ export namespace Prisma {
     basicSalary: string | null
     salaryType: $Enums.SalaryType | null
     payComponent: string | null
-    role: $Enums.Role | null
     hireDate: Date | null
     isActive: boolean | null
     employeeRoleId: number | null
@@ -2466,7 +2465,6 @@ export namespace Prisma {
     basicSalary: string | null
     salaryType: $Enums.SalaryType | null
     payComponent: string | null
-    role: $Enums.Role | null
     hireDate: Date | null
     isActive: boolean | null
     employeeRoleId: number | null
@@ -2506,7 +2504,6 @@ export namespace Prisma {
     basicSalary: number
     salaryType: number
     payComponent: number
-    role: number
     hireDate: number
     isActive: number
     employeeRoleId: number
@@ -2558,7 +2555,6 @@ export namespace Prisma {
     basicSalary?: true
     salaryType?: true
     payComponent?: true
-    role?: true
     hireDate?: true
     isActive?: true
     employeeRoleId?: true
@@ -2598,7 +2594,6 @@ export namespace Prisma {
     basicSalary?: true
     salaryType?: true
     payComponent?: true
-    role?: true
     hireDate?: true
     isActive?: true
     employeeRoleId?: true
@@ -2638,7 +2633,6 @@ export namespace Prisma {
     basicSalary?: true
     salaryType?: true
     payComponent?: true
-    role?: true
     hireDate?: true
     isActive?: true
     employeeRoleId?: true
@@ -2765,7 +2759,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType: $Enums.SalaryType
     payComponent: string | null
-    role: $Enums.Role
     hireDate: Date
     isActive: boolean
     employeeRoleId: number
@@ -2824,7 +2817,6 @@ export namespace Prisma {
     basicSalary?: boolean
     salaryType?: boolean
     payComponent?: boolean
-    role?: boolean
     hireDate?: boolean
     isActive?: boolean
     employeeRoleId?: boolean
@@ -2869,7 +2861,6 @@ export namespace Prisma {
     basicSalary?: boolean
     salaryType?: boolean
     payComponent?: boolean
-    role?: boolean
     hireDate?: boolean
     isActive?: boolean
     employeeRoleId?: boolean
@@ -2877,7 +2868,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstName" | "lastName" | "email" | "userName" | "password" | "dateOfBirth" | "gender" | "bloodGroup" | "phone" | "alternatePhoneNumber" | "familyPhoneNumber" | "twitterLink" | "faceBookLink" | "instagramLink" | "guardian" | "aadharNumber" | "panNumber" | "permanentAddress" | "currentAddress" | "accountHolderName" | "accountNumber" | "bankName" | "IFSC_code" | "bankBranch" | "taxPayerId" | "primaryWorkLocation" | "basicSalary" | "salaryType" | "payComponent" | "role" | "hireDate" | "isActive" | "employeeRoleId" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
+  export type EmployeeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "prefix" | "firstName" | "lastName" | "email" | "userName" | "password" | "dateOfBirth" | "gender" | "bloodGroup" | "phone" | "alternatePhoneNumber" | "familyPhoneNumber" | "twitterLink" | "faceBookLink" | "instagramLink" | "guardian" | "aadharNumber" | "panNumber" | "permanentAddress" | "currentAddress" | "accountHolderName" | "accountNumber" | "bankName" | "IFSC_code" | "bankBranch" | "taxPayerId" | "primaryWorkLocation" | "basicSalary" | "salaryType" | "payComponent" | "hireDate" | "isActive" | "employeeRoleId" | "createdAt" | "updatedAt", ExtArgs["result"]["employee"]>
   export type EmployeeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accessStores?: boolean | Employee$accessStoresArgs<ExtArgs>
     employeeRole?: boolean | EmployeeRoleDefaultArgs<ExtArgs>
@@ -2922,7 +2913,6 @@ export namespace Prisma {
       basicSalary: string
       salaryType: $Enums.SalaryType
       payComponent: string | null
-      role: $Enums.Role
       hireDate: Date
       isActive: boolean
       employeeRoleId: number
@@ -3330,7 +3320,6 @@ export namespace Prisma {
     readonly basicSalary: FieldRef<"Employee", 'String'>
     readonly salaryType: FieldRef<"Employee", 'SalaryType'>
     readonly payComponent: FieldRef<"Employee", 'String'>
-    readonly role: FieldRef<"Employee", 'Role'>
     readonly hireDate: FieldRef<"Employee", 'DateTime'>
     readonly isActive: FieldRef<"Employee", 'Boolean'>
     readonly employeeRoleId: FieldRef<"Employee", 'Int'>
@@ -6907,7 +6896,6 @@ export namespace Prisma {
     basicSalary: 'basicSalary',
     salaryType: 'salaryType',
     payComponent: 'payComponent',
-    role: 'role',
     hireDate: 'hireDate',
     isActive: 'isActive',
     employeeRoleId: 'employeeRoleId',
@@ -7241,7 +7229,6 @@ export namespace Prisma {
     basicSalary?: StringFilter<"Employee"> | string
     salaryType?: EnumSalaryTypeFilter<"Employee"> | $Enums.SalaryType
     payComponent?: StringNullableFilter<"Employee"> | string | null
-    role?: EnumRoleFilter<"Employee"> | $Enums.Role
     hireDate?: DateTimeFilter<"Employee"> | Date | string
     isActive?: BoolFilter<"Employee"> | boolean
     employeeRoleId?: IntFilter<"Employee"> | number
@@ -7283,7 +7270,6 @@ export namespace Prisma {
     basicSalary?: SortOrder
     salaryType?: SortOrder
     payComponent?: SortOrderInput | SortOrder
-    role?: SortOrder
     hireDate?: SortOrder
     isActive?: SortOrder
     employeeRoleId?: SortOrder
@@ -7329,7 +7315,6 @@ export namespace Prisma {
     basicSalary?: StringFilter<"Employee"> | string
     salaryType?: EnumSalaryTypeFilter<"Employee"> | $Enums.SalaryType
     payComponent?: StringNullableFilter<"Employee"> | string | null
-    role?: EnumRoleFilter<"Employee"> | $Enums.Role
     hireDate?: DateTimeFilter<"Employee"> | Date | string
     isActive?: BoolFilter<"Employee"> | boolean
     employeeRoleId?: IntFilter<"Employee"> | number
@@ -7371,7 +7356,6 @@ export namespace Prisma {
     basicSalary?: SortOrder
     salaryType?: SortOrder
     payComponent?: SortOrderInput | SortOrder
-    role?: SortOrder
     hireDate?: SortOrder
     isActive?: SortOrder
     employeeRoleId?: SortOrder
@@ -7419,7 +7403,6 @@ export namespace Prisma {
     basicSalary?: StringWithAggregatesFilter<"Employee"> | string
     salaryType?: EnumSalaryTypeWithAggregatesFilter<"Employee"> | $Enums.SalaryType
     payComponent?: StringNullableWithAggregatesFilter<"Employee"> | string | null
-    role?: EnumRoleWithAggregatesFilter<"Employee"> | $Enums.Role
     hireDate?: DateTimeWithAggregatesFilter<"Employee"> | Date | string
     isActive?: BoolWithAggregatesFilter<"Employee"> | boolean
     employeeRoleId?: IntWithAggregatesFilter<"Employee"> | number
@@ -7778,7 +7761,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     createdAt?: Date | string
@@ -7819,7 +7801,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     employeeRoleId: number
@@ -7859,7 +7840,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -7900,7 +7880,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     employeeRoleId?: IntFieldUpdateOperationsInput | number
@@ -7941,7 +7920,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     employeeRoleId: number
@@ -7980,7 +7958,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -8019,7 +7996,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     employeeRoleId?: IntFieldUpdateOperationsInput | number
@@ -8565,7 +8541,6 @@ export namespace Prisma {
     basicSalary?: SortOrder
     salaryType?: SortOrder
     payComponent?: SortOrder
-    role?: SortOrder
     hireDate?: SortOrder
     isActive?: SortOrder
     employeeRoleId?: SortOrder
@@ -8610,7 +8585,6 @@ export namespace Prisma {
     basicSalary?: SortOrder
     salaryType?: SortOrder
     payComponent?: SortOrder
-    role?: SortOrder
     hireDate?: SortOrder
     isActive?: SortOrder
     employeeRoleId?: SortOrder
@@ -8650,7 +8624,6 @@ export namespace Prisma {
     basicSalary?: SortOrder
     salaryType?: SortOrder
     payComponent?: SortOrder
-    role?: SortOrder
     hireDate?: SortOrder
     isActive?: SortOrder
     employeeRoleId?: SortOrder
@@ -9604,7 +9577,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     createdAt?: Date | string
@@ -9644,7 +9616,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     employeeRoleId: number
@@ -9708,7 +9679,6 @@ export namespace Prisma {
     basicSalary?: StringFilter<"Employee"> | string
     salaryType?: EnumSalaryTypeFilter<"Employee"> | $Enums.SalaryType
     payComponent?: StringNullableFilter<"Employee"> | string | null
-    role?: EnumRoleFilter<"Employee"> | $Enums.Role
     hireDate?: DateTimeFilter<"Employee"> | Date | string
     isActive?: BoolFilter<"Employee"> | boolean
     employeeRoleId?: IntFilter<"Employee"> | number
@@ -9765,7 +9735,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     createdAt?: Date | string
@@ -9805,7 +9774,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     createdAt?: Date | string
@@ -10004,7 +9972,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10044,7 +10011,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     employeeRoleId?: IntFieldUpdateOperationsInput | number
@@ -10084,7 +10050,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     employeeRoleId?: IntFieldUpdateOperationsInput | number
@@ -10124,7 +10089,6 @@ export namespace Prisma {
     basicSalary: string
     salaryType?: $Enums.SalaryType
     payComponent?: string | null
-    role: $Enums.Role
     hireDate: Date | string
     isActive?: boolean
     createdAt?: Date | string
@@ -10182,7 +10146,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10222,7 +10185,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -10262,7 +10224,6 @@ export namespace Prisma {
     basicSalary?: StringFieldUpdateOperationsInput | string
     salaryType?: EnumSalaryTypeFieldUpdateOperationsInput | $Enums.SalaryType
     payComponent?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

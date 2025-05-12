@@ -21,7 +21,7 @@ class AdminService{
     public static async updateAdmin(id: number, data: Partial<AdminType>){
         const admin = await prisma.admin.update({
             where: {
-                id
+                id,
             },
             data
         })

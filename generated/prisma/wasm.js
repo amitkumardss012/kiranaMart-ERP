@@ -165,7 +165,6 @@ exports.Prisma.EmployeeScalarFieldEnum = {
   basicSalary: 'basicSalary',
   salaryType: 'salaryType',
   payComponent: 'payComponent',
-  role: 'role',
   hireDate: 'hireDate',
   isActive: 'isActive',
   employeeRoleId: 'employeeRoleId',
