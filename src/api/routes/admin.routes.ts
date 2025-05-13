@@ -5,7 +5,7 @@ import { authenticatAdmin, isSuperAdmin } from "../middleware/auth.middleware";
 const adminRoute = async (app: FastifyInstance) => {
   app.post(
     "/create",
-    { preHandler: [authenticatAdmin, isSuperAdmin] },
+    { preHandler: [authenticatAdmin] },
     AdminController.createAdmin
   );
   app.post("/login", AdminController.login);
@@ -17,9 +17,9 @@ const adminRoute = async (app: FastifyInstance) => {
   );
   app.get("/logout", { preHandler: authenticatAdmin }, AdminController.logout);
 
-  app.patch(
+  app.post(
     "/:id",
-    { preHandler: [authenticatAdmin, isSuperAdmin] },
+    { preHandler: [authenticatAdmin] },
     AdminController.update
   );
 };

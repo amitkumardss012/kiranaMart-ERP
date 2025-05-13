@@ -69,6 +69,28 @@ class EmployeeService {
     });
     return employee;
   }
+
+  public static async updateEmployee(id: number, data: Partial<EmployeeType>){
+    const employee = await prisma.employee.update({
+      where: {
+        id,
+      },
+      data:{
+        ...data,
+        accessStores: data.accessStores
+        ? {
+            set: data.accessStores.map((storeId) => ({ id: storeId })),
+          }
+        : undefined,
+      },
+      include: {
+        employeeRole: true,
+        accessStores: true,
+      },
+    });
+    return employee;
+  }
+
 }
 
 export default EmployeeService;

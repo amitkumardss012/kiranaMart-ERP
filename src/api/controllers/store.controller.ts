@@ -44,28 +44,33 @@ export const createStore = asyncHandler(async (request, reply) => {
   );
 });
 
-export const getAllStores = asyncHandler(async (request: FastifyRequest<{ Querystring: { page: string; limit: string } }>, reply) => {
-  const page = Number(request.query.page) || 1;
-  const limit = Number(request.query.limit) || 10;
+export const getAllStores = asyncHandler(
+  async (
+    request: FastifyRequest<{ Querystring: { page: string; limit: string } }>,
+    reply
+  ) => {
+    const page = Number(request.query.page) || 1;
+    const limit = Number(request.query.limit) || 10;
 
-  const [stores, totalStores] = await Promise.all([
-    StoreService.getAllStores(page, limit),
-    prisma.store.count(),
-  ]);
+    const [stores, totalStores] = await Promise.all([
+      StoreService.getAllStores(page, limit),
+      prisma.store.count(),
+    ]);
 
-  if(page > Math.ceil(totalStores / limit) && totalStores > 0) {
-    throw new ErrorResponse("Page not found", statusCode.Not_Found);
+    if (page > Math.ceil(totalStores / limit) && totalStores > 0) {
+      throw new ErrorResponse("Page not found", statusCode.Not_Found);
+    }
+
+    if (!stores.length) {
+      throw new ErrorResponse("No stores found", statusCode.Not_Found);
+    }
+
+    return SuccessResponse(reply, "Stores fetched successfully", {
+      stores,
+      currentPage: page,
+      totalPages: Math.ceil(totalStores / limit),
+      totalStores,
+      count: stores.length,
+    });
   }
-
-  if(!stores.length) {
-    throw new ErrorResponse("No stores found", statusCode.Not_Found);
-  }
-
-  return SuccessResponse(reply, "Stores fetched successfully", {
-    stores,
-    currentPage: page,
-    totalPages: Math.ceil(totalStores / limit),
-    totalStores,
-    count: stores.length
-  });
-});
+);

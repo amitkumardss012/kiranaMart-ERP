@@ -5,11 +5,12 @@ import { authenticatAdmin, isSuperAdmin } from "../middleware/auth.middleware";
 const employeeRoute = async (app: FastifyInstance) => {
   app.post(
     "/create",
-    { preHandler: [authenticatAdmin, isSuperAdmin] },
+    { preHandler: [authenticatAdmin] },
     EmployeeController.Create
   );
   app.get("/all", { preHandler: authenticatAdmin }, EmployeeController.GetAll);
   app.get("/:id", { preHandler: authenticatAdmin }, EmployeeController.GetById);
+  app.post("/:id", { preHandler: authenticatAdmin }, EmployeeController.Update);
 };
 
 export default employeeRoute;
