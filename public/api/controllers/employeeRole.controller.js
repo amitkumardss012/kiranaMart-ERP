@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GetById = exports.GetAll = exports.Create = void 0;
+exports.Update = exports.GetById = exports.GetAll = exports.Create = void 0;
 const services_1 = require("../services");
 const types_1 = require("../types/types");
 const asyncHandler_1 = require("../utils/asyncHandler");
@@ -41,4 +41,20 @@ exports.GetById = (0, asyncHandler_1.asyncHandler)((request, reply) => __awaiter
         throw new response_util_1.ErrorResponse("Invalid id", types_1.statusCode.Bad_Request);
     const role = yield services_1.EmployeeRoleService.getEmployeeRoleById(id);
     return (0, response_util_1.SuccessResponse)(reply, "Employee role fetched successfully", role);
+}));
+exports.Update = (0, asyncHandler_1.asyncHandler)((request, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.params.id);
+    if (!id || isNaN(id))
+        throw new response_util_1.ErrorResponse("Invalid id", types_1.statusCode.Bad_Request);
+    const validData = employeeRole_validator_1.employeeRoleValidator.partial().safeParse(request.body);
+    if (!validData.success) {
+        const zodErr = (0, validators_1.zodError)(validData.error);
+        return reply.status(types_1.statusCode.Bad_Request).send({
+            success: false,
+            message: "Validation Error",
+            errors: zodErr,
+        });
+    }
+    const updatedRole = yield services_1.EmployeeRoleService.updateEmployeeRole(id, validData.data);
+    return (0, response_util_1.SuccessResponse)(reply, "Employee role updated successfully", updatedRole);
 }));

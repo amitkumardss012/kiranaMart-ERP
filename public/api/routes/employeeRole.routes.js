@@ -12,8 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const controllers_1 = require("../controllers");
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const emplyeeRoleRoute = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin, auth_middleware_1.isSuperAdmin] }, controllers_1.EmployeeRoleController.Create);
+    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.EmployeeRoleController.Create);
     app.get("/all", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.EmployeeRoleController.GetAll);
     app.get("/:id", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.EmployeeRoleController.GetById);
+    app.post("/:id", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.EmployeeRoleController.Update);
 });
 exports.default = emplyeeRoleRoute;

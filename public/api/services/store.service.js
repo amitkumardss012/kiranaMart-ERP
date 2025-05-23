@@ -33,8 +33,10 @@ class StoreService {
         });
     }
     static getAllStores() {
-        return __awaiter(this, void 0, void 0, function* () {
+        return __awaiter(this, arguments, void 0, function* (page = 1, limit = 10) {
             const stores = yield config_1.prisma.store.findMany({
+                take: limit,
+                skip: (page - 1) * limit,
                 orderBy: {
                     createdAt: "desc"
                 }

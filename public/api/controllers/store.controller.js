@@ -17,6 +17,7 @@ const asyncHandler_1 = require("../utils/asyncHandler");
 const response_util_1 = require("../utils/response.util");
 const validators_1 = require("../validators");
 const store_validator_1 = require("../validators/store.validator");
+const config_1 = require("../../config");
 exports.createStore = (0, asyncHandler_1.asyncHandler)((request, reply) => __awaiter(void 0, void 0, void 0, function* () {
     const result = store_validator_1.storeValidator.safeParse(request.body);
     if (!result.success) {
@@ -38,6 +39,23 @@ exports.createStore = (0, asyncHandler_1.asyncHandler)((request, reply) => __awa
     return (0, response_util_1.SuccessResponse)(reply, "Store created successfully", store, types_1.statusCode.Created);
 }));
 exports.getAllStores = (0, asyncHandler_1.asyncHandler)((request, reply) => __awaiter(void 0, void 0, void 0, function* () {
-    const stores = yield services_1.StoreService.getAllStores();
-    return (0, response_util_1.SuccessResponse)(reply, "Stores fetched successfully", stores);
+    const page = Number(request.query.page) || 1;
+    const limit = Number(request.query.limit) || 10;
+    const [stores, totalStores] = yield Promise.all([
+        services_1.StoreService.getAllStores(page, limit),
+        config_1.prisma.store.count(),
+    ]);
+    if (page > Math.ceil(totalStores / limit) && totalStores > 0) {
+        throw new utils_1.ErrorResponse("Page not found", types_1.statusCode.Not_Found);
+    }
+    if (!stores.length) {
+        throw new utils_1.ErrorResponse("No stores found", types_1.statusCode.Not_Found);
+    }
+    return (0, response_util_1.SuccessResponse)(reply, "Stores fetched successfully", {
+        stores,
+        currentPage: page,
+        totalPages: Math.ceil(totalStores / limit),
+        totalStores,
+        count: stores.length,
+    });
 }));

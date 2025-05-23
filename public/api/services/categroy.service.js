@@ -9,58 +9,56 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.CategoryService = void 0;
 const config_1 = require("../../config");
-class AdminService {
-    static createAdmin(data) {
+class CategoryService {
+    static createCategory(data, imagePath) {
         return __awaiter(this, void 0, void 0, function* () {
-            const admin = yield config_1.prisma.admin.create({
-                data
+            const category = yield config_1.prisma.category.create({
+                data: Object.assign(Object.assign({}, data), { image: imagePath })
             });
-            return admin;
+            return category;
         });
     }
-    static getAdminByEmail(email) {
+    static getAllCategories(page, limit, where) {
         return __awaiter(this, void 0, void 0, function* () {
-            const admin = yield config_1.prisma.admin.findUnique({
-                where: {
-                    email
-                }
-            });
-            return admin;
-        });
-    }
-    static updateAdmin(id, data) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const admin = yield config_1.prisma.admin.update({
-                where: {
-                    id,
+            const categories = yield config_1.prisma.category.findMany({
+                where,
+                skip: (page - 1) * limit,
+                take: limit,
+                include: {
+                    subCategory: true
                 },
-                data
-            });
-            return admin;
-        });
-    }
-    static getAllAdmins() {
-        return __awaiter(this, void 0, void 0, function* () {
-            const admins = yield config_1.prisma.admin.findMany({
-                select: {
-                    id: true,
-                    name: true,
-                    email: true,
+                orderBy: {
+                    createdAt: "desc"
                 }
             });
-            return admins;
+            return categories;
         });
     }
-    static getAdminById(id) {
+    static getCategoryById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const admin = yield config_1.prisma.admin.findUnique({
+            const category = yield config_1.prisma.category.findUnique({
                 where: {
                     id
+                },
+                include: {
+                    subCategory: true
                 }
             });
-            return admin;
+            return category;
+        });
+    }
+    static updateCategory(id, data, imagePath) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const category = yield config_1.prisma.category.update({
+                where: {
+                    id
+                },
+                data: Object.assign(Object.assign({}, data), { image: imagePath })
+            });
+            return category;
         });
     }
 }
-exports.default = AdminService;
+exports.CategoryService = CategoryService;

@@ -11,8 +11,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const controllers_1 = require("../controllers");
 const auth_middleware_1 = require("../middleware/auth.middleware");
-const storeRoute = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.StoreController.createStore);
-    app.get("/all", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.StoreController.getAllStores);
+const discountRoute = (app) => __awaiter(void 0, void 0, void 0, function* () {
+    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.DiscountController.createDiscount);
+    app.get("/all", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.DiscountController.getAllDiscounts);
+    app.get("/:id", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.DiscountController.getDiscountById);
+    app.post("/:id", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.DiscountController.updateDiscount);
 });
-exports.default = storeRoute;
+exports.default = discountRoute;

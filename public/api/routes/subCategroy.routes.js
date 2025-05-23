@@ -9,10 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const controllers_1 = require("../controllers");
 const auth_middleware_1 = require("../middleware/auth.middleware");
-const storeRoute = (app) => __awaiter(void 0, void 0, void 0, function* () {
-    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.StoreController.createStore);
-    app.get("/all", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.StoreController.getAllStores);
+const controllers_1 = require("../controllers");
+const subCategoryRoutes = (app) => __awaiter(void 0, void 0, void 0, function* () {
+    app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.SubCategoryController.createSubCategory);
+    app.get("/all", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.SubCategoryController.getAllSubCategory);
+    app.get("/:id", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.SubCategoryController.getSubCategoryById);
+    app.post("/:id", { preHandler: auth_middleware_1.authenticatAdmin }, controllers_1.SubCategoryController.updateSubCategory);
 });
-exports.default = storeRoute;
+exports.default = subCategoryRoutes;

@@ -5,8 +5,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cookie_1 = __importDefault(require("@fastify/cookie"));
 const cors_1 = __importDefault(require("@fastify/cors"));
+const multipart_1 = __importDefault(require("@fastify/multipart"));
+const static_1 = __importDefault(require("@fastify/static"));
 const fastify_1 = __importDefault(require("fastify"));
 const fastify_type_provider_zod_1 = require("fastify-type-provider-zod");
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
 const middleware_1 = require("./api/middleware");
 const routes_1 = __importDefault(require("./api/routes"));
 const config_1 = require("./config");
@@ -24,6 +28,18 @@ app.register(cookie_1.default, {
 app.register(cors_1.default, {
     origin: '*',
 });
+app.register(multipart_1.default, { limits: { fileSize: 2 * 1024 * 1024 } });
+app.register(static_1.default, {
+    root: path_1.default.join(process.cwd(), "upload"),
+    prefix: "/upload/",
+    cacheControl: true,
+    // maxAge: "7d", // Cache for 7 days
+});
+// Ensure upload directory exists
+const uploadDir = path_1.default.join(__dirname, "../upload/category");
+if (!fs_1.default.existsSync(uploadDir)) {
+    fs_1.default.mkdirSync(uploadDir, { recursive: true });
+}
 // 🩺 Health check endpoint
 app.get("/", (request, reply) => {
     reply.send({ hello: "world", port: config_1.ENV.PORT });

@@ -53,8 +53,9 @@ class EmployeeRoleService {
     static getAllEmployeeRoles() {
         return __awaiter(this, void 0, void 0, function* () {
             const employeeRoles = yield config_1.prisma.employeeRole.findMany({
-                include: {
-                    permission: true,
+                select: {
+                    id: true,
+                    roleName: true,
                 },
             });
             return employeeRoles;
@@ -71,6 +72,35 @@ class EmployeeRoleService {
                 },
             });
             return employeeRole;
+        });
+    }
+    static updateEmployeeRole(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { roleName, permissions } = data;
+            try {
+                const employeeRole = yield config_1.prisma.employeeRole.update({
+                    where: { id },
+                    data: {
+                        roleName: roleName === null || roleName === void 0 ? void 0 : roleName.trim(),
+                        permission: permissions
+                            ? { set: permissions.map((perm) => ({ name: perm })) }
+                            : undefined,
+                    },
+                    include: {
+                        permission: true,
+                    },
+                });
+                return employeeRole;
+            }
+            catch (err) {
+                if (err.code === "P2002") {
+                    throw new utils_1.ErrorResponse("Role Name already exists", types_1.statusCode.Conflict);
+                }
+                if (err.code === "P2025") {
+                    throw new utils_1.ErrorResponse("Permission not found", types_1.statusCode.Not_Found);
+                }
+                throw err;
+            }
         });
     }
 }
