@@ -127,10 +127,10 @@ enum StoreStatus {
 }
 
 model EmployeeRole {
-  id           Int          @id @default(autoincrement())
-  roleName     String @unique
-  permission   Permission[] @relation("employeeRoles")
-  
+  id         Int          @id @default(autoincrement())
+  roleName   String       @unique
+  permission Permission[] @relation("employeeRoles")
+
   employeeRole Employee[]
 
   createdAt DateTime @default(now())
@@ -145,3 +145,100 @@ model Permission {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Product {
+  id              Int       @id @default(autoincrement())
+  name            String
+  description     String?
+  sku             String?   @unique
+  brand           String?
+  barcode         String?   @unique
+  sellingPrice    Float
+  costPrice       Float
+  unit            Unit      @default(PIECE)
+  hasOffer        Boolean   @default(false)
+  manufactureDate DateTime?
+  expiryDate      DateTime?
+  selfLife        Int?
+  image           String?
+  isActive        Boolean   @default(true)
+
+  // Relationships
+  categoryId    Int?
+  category      Category?    @relation(fields: [categoryId], references: [id])
+  subCategoryId Int?
+  subCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+  discountId    Int?
+  discount      Discount?    @relation(fields: [discountId], references: [id])
+
+  // Timestamps
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Unit {
+  PIECE // Piece - default
+  KG // Kilogram
+  GRAM // Gram
+  LITER // Liter
+  ML // Milliliter
+  METER // Meter
+}
+
+model Discount {
+  id           Int          @id @default(autoincrement())
+  title        String
+  description  String?
+  discountType DiscountType
+  value        Float? // e.g., 40 for 40% OFF
+  buyQty       Int? // For BOGO: e.g., buy 1
+  getQty       Int? // For BOGO: get 1
+  startDate    DateTime
+  endDate      DateTime
+  isActive     Boolean      @default(true)
+
+  // Relationships
+  product Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Enums
+enum DiscountType {
+  PERCENTAGE // e.g., 40% OFF
+  FLAT // e.g., ₹50 OFF
+  BOGO // Buy One Get One
+}
+
+model Category {
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  description String?
+  image       String?
+  isActive    Boolean       @default(true)
+  // Relations
+  subCategory SubCategory[]
+  product     Product[]
+  // Timestamps
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model SubCategory {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  categoryId  Int
+  isActive    Boolean   @default(true)
+  // Relationships
+  category    Category  @relation(fields: [categoryId], references: [id])
+  product     Product[]
+  // Timestamps
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+// 🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫 don't move futer without implementing inventry section 🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫
+

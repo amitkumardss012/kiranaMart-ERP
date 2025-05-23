@@ -4,8 +4,7 @@ import { authenticatAdmin, isSuperAdmin } from "../middleware/auth.middleware";
 
 const storeRoute = async (app: FastifyInstance) => {
     app.post("/create", { preHandler: [authenticatAdmin] }, StoreController.createStore);
-    app.get("/all", { preHandler: authenticatAdmin }, StoreController.getAllStores);
-    
+    app.get("/all", { preHandler: authenticatAdmin }, StoreController.getAllStores);   
 }
 
 export default storeRoute;

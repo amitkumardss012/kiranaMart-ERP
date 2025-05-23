@@ -81,21 +81,35 @@ class EmployeeRoleService {
     data: Partial<EmployeeRoleType>
   ) {
     const { roleName, permissions } = data;
-    const employeeRole = await prisma.employeeRole.update({
-      where: {
-        id,
-      },
-      data: {
-        roleName: roleName?.trim(),
-        permission: data.permissions
-          ? { set: data.permissions.map((perm) => ({ name: perm })) }
-          : undefined,
-      },
-      include: {
-        permission: true,
-      },
-    });
-    return employeeRole;
+    try {
+      const employeeRole = await prisma.employeeRole.update({
+        where: { id },
+        data: {
+          roleName: roleName?.trim(),
+          permission: permissions
+            ? { set: permissions.map((perm) => ({ name: perm })) }
+            : undefined,
+        },
+        include: {
+          permission: true,
+        },
+      });
+      return employeeRole;
+    } catch (err: any) {
+      if (err.code === "P2002") {
+        throw new ErrorResponse(
+          "Role Name already exists",
+          statusCode.Conflict
+        );
+      }
+      if(err.code === "P2025"){
+        throw new ErrorResponse(
+          "Permission not found",
+          statusCode.Not_Found 
+        )
+      }
+      throw err;
+    }
   }
 }
 

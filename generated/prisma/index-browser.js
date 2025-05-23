@@ -207,6 +207,65 @@ exports.Prisma.PermissionScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  sku: 'sku',
+  brand: 'brand',
+  barcode: 'barcode',
+  sellingPrice: 'sellingPrice',
+  costPrice: 'costPrice',
+  unit: 'unit',
+  hasOffer: 'hasOffer',
+  manufactureDate: 'manufactureDate',
+  expiryDate: 'expiryDate',
+  selfLife: 'selfLife',
+  image: 'image',
+  isActive: 'isActive',
+  categoryId: 'categoryId',
+  subCategoryId: 'subCategoryId',
+  discountId: 'discountId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DiscountScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  discountType: 'discountType',
+  value: 'value',
+  buyQty: 'buyQty',
+  getQty: 'getQty',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  image: 'image',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SubCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  image: 'image',
+  categoryId: 'categoryId',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -271,6 +330,32 @@ exports.Prisma.EmployeeRoleOrderByRelevanceFieldEnum = {
 exports.Prisma.PermissionOrderByRelevanceFieldEnum = {
   name: 'name'
 };
+
+exports.Prisma.ProductOrderByRelevanceFieldEnum = {
+  name: 'name',
+  description: 'description',
+  sku: 'sku',
+  brand: 'brand',
+  barcode: 'barcode',
+  image: 'image'
+};
+
+exports.Prisma.DiscountOrderByRelevanceFieldEnum = {
+  title: 'title',
+  description: 'description'
+};
+
+exports.Prisma.CategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  description: 'description',
+  image: 'image'
+};
+
+exports.Prisma.SubCategoryOrderByRelevanceFieldEnum = {
+  name: 'name',
+  description: 'description',
+  image: 'image'
+};
 exports.Role = exports.$Enums.Role = {
   SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN'
@@ -299,12 +384,31 @@ exports.StoreType = exports.$Enums.StoreType = {
   OTHER: 'OTHER'
 };
 
+exports.Unit = exports.$Enums.Unit = {
+  PIECE: 'PIECE',
+  KG: 'KG',
+  GRAM: 'GRAM',
+  LITER: 'LITER',
+  ML: 'ML',
+  METER: 'METER'
+};
+
+exports.DiscountType = exports.$Enums.DiscountType = {
+  PERCENTAGE: 'PERCENTAGE',
+  FLAT: 'FLAT',
+  BOGO: 'BOGO'
+};
+
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Employee: 'Employee',
   Store: 'Store',
   EmployeeRole: 'EmployeeRole',
-  Permission: 'Permission'
+  Permission: 'Permission',
+  Product: 'Product',
+  Discount: 'Discount',
+  Category: 'Category',
+  SubCategory: 'SubCategory'
 };
 
 /**
