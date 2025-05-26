@@ -171,6 +171,8 @@ model Product {
   discountId    Int?
   discount      Discount?    @relation(fields: [discountId], references: [id])
 
+  customerPurchaseItem CustomerPurchaseItem[]
+
   // Timestamps
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -242,3 +244,66 @@ model SubCategory {
 
 // 🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫 don't move futer without implementing inventry section 🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫🚫
 
+model Customer {
+  id       Int     @id @default(autoincrement())
+  name     String?
+  phone    String? @unique
+  isActive Boolean @default(true)
+
+  customerPurchase CustomerPurchase[]
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+model CustomerPurchase {
+  id             Int            @id @default(autoincrement())
+  totalAmount    Float
+  purchaseStatus PurchaseStatus? @default(PENDING)
+  paymentMethod  PaymentMethod  @default(CASH)
+  transactionId  String?        @unique
+  purchasedAt    DateTime       @default(now())
+  taxAmount      Float?
+  discountAmount Float?
+
+  customerId Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+
+  customerPurchaseItem CustomerPurchaseItem[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+  RETURNED
+}
+
+enum PaymentMethod {
+  CASH
+  CARD
+  UPI
+  WALLET
+  OTHER
+}
+
+model CustomerPurchaseItem {
+  id                 Int    @id @default(autoincrement())
+  productId          Int
+  customerPurchaseId Int
+  quantity           Int
+  unitPrice          Float
+  discount           Float?
+  finalPrice         Float  // Final price after applying discount 
+
+  product          Product          @relation(fields: [productId], references: [id])
+  customerPurchase CustomerPurchase @relation(fields: [customerPurchaseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([customerPurchaseId, productId])
+  @@index([customerPurchaseId])
+}

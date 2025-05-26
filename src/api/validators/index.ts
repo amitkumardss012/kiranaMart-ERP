@@ -7,7 +7,8 @@ import {
 import { employeeValidator, EmployeeType } from "./employee.validator";
 import { categoryValidator, CategoryType } from "./categroy.validator";
 import { discountValidator, DiscountType } from "./discount.validator";
-import {ProductType,ProductValidator} from "./product.validator"
+import { ProductType, ProductValidator } from "./product.validator";
+import { CustomerType, customerValidator } from "./customer.validation";
 
 export {
   zodError,
@@ -20,8 +21,11 @@ export {
   categoryValidator,
   CategoryType,
   discountValidator,
-  DiscountType
-  ,ProductType,ProductValidator
+  DiscountType,
+  ProductType,
+  ProductValidator,
+  CustomerType,
+  customerValidator,
 };
 
 const zodError = (error: ZodError) => {

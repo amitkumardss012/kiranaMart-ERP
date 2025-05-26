@@ -177,7 +177,7 @@ export const updateSubCategory = asyncHandler(
       throw new ErrorResponse("Invalid id", statusCode.Bad_Request);
     }
 
-    const validData = SubCategoryValidator.safeParse(req.body);
+    const validData = SubCategoryValidator.partial().safeParse(req.body);
     if (!validData.success) {
       return reply.status(400).send({
         success: false,

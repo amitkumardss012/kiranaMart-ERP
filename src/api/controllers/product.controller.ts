@@ -285,3 +285,30 @@ export const updateProduct = asyncHandler(
     return SuccessResponse(reply, "Product updated successfully", updatedProduct);
   }
 );
+
+
+export const getProductByBarCode = asyncHandler(async(req: FastifyRequest<{Params: {barcode: string}}>, reply) => {
+  const {barcode} = req.params;
+
+  if (!barcode || typeof barcode !== "string") {
+    throw new ErrorResponse("Invalid or missing barcode", statusCode.Bad_Request);
+  }
+
+  const product = await prisma.product.findUnique({
+    where: {
+      barcode,
+    },
+    include: {
+      category: true,
+      subCategory: true,
+      discount: true,
+    },
+  });
+
+  if (!product) {
+    throw new ErrorResponse("Product not found with given barcode", statusCode.Not_Found);
+  }
+
+  return SuccessResponse(reply, "Product fetched successfully", product);
+
+})

@@ -266,6 +266,41 @@ exports.Prisma.SubCategoryScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CustomerScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CustomerPurchaseScalarFieldEnum = {
+  id: 'id',
+  totalAmount: 'totalAmount',
+  purchaseStatus: 'purchaseStatus',
+  paymentMethod: 'paymentMethod',
+  transactionId: 'transactionId',
+  purchasedAt: 'purchasedAt',
+  taxAmount: 'taxAmount',
+  discountAmount: 'discountAmount',
+  customerId: 'customerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.CustomerPurchaseItemScalarFieldEnum = {
+  id: 'id',
+  productId: 'productId',
+  customerPurchaseId: 'customerPurchaseId',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  discount: 'discount',
+  finalPrice: 'finalPrice',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -356,6 +391,15 @@ exports.Prisma.SubCategoryOrderByRelevanceFieldEnum = {
   description: 'description',
   image: 'image'
 };
+
+exports.Prisma.CustomerOrderByRelevanceFieldEnum = {
+  name: 'name',
+  phone: 'phone'
+};
+
+exports.Prisma.CustomerPurchaseOrderByRelevanceFieldEnum = {
+  transactionId: 'transactionId'
+};
 exports.Role = exports.$Enums.Role = {
   SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN'
@@ -399,6 +443,21 @@ exports.DiscountType = exports.$Enums.DiscountType = {
   BOGO: 'BOGO'
 };
 
+exports.PurchaseStatus = exports.$Enums.PurchaseStatus = {
+  PENDING: 'PENDING',
+  COMPLETED: 'COMPLETED',
+  CANCELLED: 'CANCELLED',
+  RETURNED: 'RETURNED'
+};
+
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  CASH: 'CASH',
+  CARD: 'CARD',
+  UPI: 'UPI',
+  WALLET: 'WALLET',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Employee: 'Employee',
@@ -408,7 +467,10 @@ exports.Prisma.ModelName = {
   Product: 'Product',
   Discount: 'Discount',
   Category: 'Category',
-  SubCategory: 'SubCategory'
+  SubCategory: 'SubCategory',
+  Customer: 'Customer',
+  CustomerPurchase: 'CustomerPurchase',
+  CustomerPurchaseItem: 'CustomerPurchaseItem'
 };
 
 /**

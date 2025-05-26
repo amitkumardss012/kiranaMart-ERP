@@ -16,6 +16,12 @@ const productRoute = async (app: FastifyInstance) => {
   );
 
   app.get(
+    "/barcode/:barcode",
+    { preHandler: [authenticatAdmin] },
+    ProductController.getProductByBarCode 
+  )
+
+  app.get(
     "/:id",
     { preHandler: [authenticatAdmin] },
     ProductController.getProductById
