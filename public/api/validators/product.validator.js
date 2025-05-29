@@ -54,17 +54,11 @@ exports.ProductValidator = zod_1.z.object({
     isActive: zod_1.z.boolean().optional(),
     categoryId: zod_1.z
         .number()
-        .int("Category ID must be an integer")
-        .positive("Category ID must be a positive number")
         .optional(),
     subCategoryId: zod_1.z
         .number()
-        .int("Sub-category ID must be an integer")
-        .positive("Sub-category ID must be a positive number")
         .optional(),
     discountId: zod_1.z
         .number()
-        .int("Discount ID must be an integer")
-        .positive("Discount ID must be a positive number")
         .optional(),
 });

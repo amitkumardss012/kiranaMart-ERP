@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateProduct = exports.getProductById = exports.getAllProducts = exports.listProduct = void 0;
+exports.getProductByBarCode = exports.updateProduct = exports.getProductById = exports.getAllProducts = exports.listProduct = void 0;
 const promises_1 = __importDefault(require("fs/promises"));
 const path_1 = __importDefault(require("path"));
 const config_1 = require("../../config");
@@ -226,4 +226,24 @@ exports.updateProduct = (0, asyncHandler_1.asyncHandler)((req, reply) => __await
         data: Object.assign(Object.assign({}, validData.data), { image: imagePath }),
     });
     return (0, response_util_1.SuccessResponse)(reply, "Product updated successfully", updatedProduct);
+}));
+exports.getProductByBarCode = (0, asyncHandler_1.asyncHandler)((req, reply) => __awaiter(void 0, void 0, void 0, function* () {
+    const { barcode } = req.params;
+    if (!barcode || typeof barcode !== "string") {
+        throw new response_util_1.ErrorResponse("Invalid or missing barcode", types_1.statusCode.Bad_Request);
+    }
+    const product = yield config_1.prisma.product.findUnique({
+        where: {
+            barcode,
+        },
+        include: {
+            category: true,
+            subCategory: true,
+            discount: true,
+        },
+    });
+    if (!product) {
+        throw new response_util_1.ErrorResponse("Product not found with given barcode", types_1.statusCode.Not_Found);
+    }
+    return (0, response_util_1.SuccessResponse)(reply, "Product fetched successfully", product);
 }));

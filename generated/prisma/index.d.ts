@@ -13288,7 +13288,7 @@ export namespace Prisma {
     purchasedAt: Date
     taxAmount: number | null
     discountAmount: number | null
-    customerId: number
+    customerId: number | null
     createdAt: Date
     updatedAt: Date
     _count: CustomerPurchaseCountAggregateOutputType | null
@@ -13324,7 +13324,7 @@ export namespace Prisma {
     customerId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    customer?: boolean | CustomerDefaultArgs<ExtArgs>
+    customer?: boolean | CustomerPurchase$customerArgs<ExtArgs>
     customerPurchaseItem?: boolean | CustomerPurchase$customerPurchaseItemArgs<ExtArgs>
     _count?: boolean | CustomerPurchaseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["customerPurchase"]>
@@ -13347,7 +13347,7 @@ export namespace Prisma {
 
   export type CustomerPurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "totalAmount" | "purchaseStatus" | "paymentMethod" | "transactionId" | "purchasedAt" | "taxAmount" | "discountAmount" | "customerId" | "createdAt" | "updatedAt", ExtArgs["result"]["customerPurchase"]>
   export type CustomerPurchaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    customer?: boolean | CustomerDefaultArgs<ExtArgs>
+    customer?: boolean | CustomerPurchase$customerArgs<ExtArgs>
     customerPurchaseItem?: boolean | CustomerPurchase$customerPurchaseItemArgs<ExtArgs>
     _count?: boolean | CustomerPurchaseCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13355,7 +13355,7 @@ export namespace Prisma {
   export type $CustomerPurchasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "CustomerPurchase"
     objects: {
-      customer: Prisma.$CustomerPayload<ExtArgs>
+      customer: Prisma.$CustomerPayload<ExtArgs> | null
       customerPurchaseItem: Prisma.$CustomerPurchaseItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13367,7 +13367,7 @@ export namespace Prisma {
       purchasedAt: Date
       taxAmount: number | null
       discountAmount: number | null
-      customerId: number
+      customerId: number | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["customerPurchase"]>
@@ -13710,7 +13710,7 @@ export namespace Prisma {
    */
   export interface Prisma__CustomerPurchaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    customer<T extends CustomerDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CustomerDefaultArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    customer<T extends CustomerPurchase$customerArgs<ExtArgs> = {}>(args?: Subset<T, CustomerPurchase$customerArgs<ExtArgs>>): Prisma__CustomerClient<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     customerPurchaseItem<T extends CustomerPurchase$customerPurchaseItemArgs<ExtArgs> = {}>(args?: Subset<T, CustomerPurchase$customerPurchaseItemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPurchaseItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14092,6 +14092,25 @@ export namespace Prisma {
      * Limit how many CustomerPurchases to delete.
      */
     limit?: number
+  }
+
+  /**
+   * CustomerPurchase.customer
+   */
+  export type CustomerPurchase$customerArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Customer
+     */
+    select?: CustomerSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Customer
+     */
+    omit?: CustomerOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CustomerInclude<ExtArgs> | null
+    where?: CustomerWhereInput
   }
 
   /**
@@ -16633,10 +16652,10 @@ export namespace Prisma {
     purchasedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     taxAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
     discountAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
-    customerId?: IntFilter<"CustomerPurchase"> | number
+    customerId?: IntNullableFilter<"CustomerPurchase"> | number | null
     createdAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     updatedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
-    customer?: XOR<CustomerScalarRelationFilter, CustomerWhereInput>
+    customer?: XOR<CustomerNullableScalarRelationFilter, CustomerWhereInput> | null
     customerPurchaseItem?: CustomerPurchaseItemListRelationFilter
   }
 
@@ -16649,7 +16668,7 @@ export namespace Prisma {
     purchasedAt?: SortOrder
     taxAmount?: SortOrderInput | SortOrder
     discountAmount?: SortOrderInput | SortOrder
-    customerId?: SortOrder
+    customerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     customer?: CustomerOrderByWithRelationInput
@@ -16669,10 +16688,10 @@ export namespace Prisma {
     purchasedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     taxAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
     discountAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
-    customerId?: IntFilter<"CustomerPurchase"> | number
+    customerId?: IntNullableFilter<"CustomerPurchase"> | number | null
     createdAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     updatedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
-    customer?: XOR<CustomerScalarRelationFilter, CustomerWhereInput>
+    customer?: XOR<CustomerNullableScalarRelationFilter, CustomerWhereInput> | null
     customerPurchaseItem?: CustomerPurchaseItemListRelationFilter
   }, "id" | "transactionId">
 
@@ -16685,7 +16704,7 @@ export namespace Prisma {
     purchasedAt?: SortOrder
     taxAmount?: SortOrderInput | SortOrder
     discountAmount?: SortOrderInput | SortOrder
-    customerId?: SortOrder
+    customerId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: CustomerPurchaseCountOrderByAggregateInput
@@ -16707,7 +16726,7 @@ export namespace Prisma {
     purchasedAt?: DateTimeWithAggregatesFilter<"CustomerPurchase"> | Date | string
     taxAmount?: FloatNullableWithAggregatesFilter<"CustomerPurchase"> | number | null
     discountAmount?: FloatNullableWithAggregatesFilter<"CustomerPurchase"> | number | null
-    customerId?: IntWithAggregatesFilter<"CustomerPurchase"> | number
+    customerId?: IntNullableWithAggregatesFilter<"CustomerPurchase"> | number | null
     createdAt?: DateTimeWithAggregatesFilter<"CustomerPurchase"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"CustomerPurchase"> | Date | string
   }
@@ -17897,7 +17916,7 @@ export namespace Prisma {
     discountAmount?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    customer: CustomerCreateNestedOneWithoutCustomerPurchaseInput
+    customer?: CustomerCreateNestedOneWithoutCustomerPurchaseInput
     customerPurchaseItem?: CustomerPurchaseItemCreateNestedManyWithoutCustomerPurchaseInput
   }
 
@@ -17910,7 +17929,7 @@ export namespace Prisma {
     purchasedAt?: Date | string
     taxAmount?: number | null
     discountAmount?: number | null
-    customerId: number
+    customerId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
     customerPurchaseItem?: CustomerPurchaseItemUncheckedCreateNestedManyWithoutCustomerPurchaseInput
@@ -17926,7 +17945,7 @@ export namespace Prisma {
     discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: CustomerUpdateOneRequiredWithoutCustomerPurchaseNestedInput
+    customer?: CustomerUpdateOneWithoutCustomerPurchaseNestedInput
     customerPurchaseItem?: CustomerPurchaseItemUpdateManyWithoutCustomerPurchaseNestedInput
   }
 
@@ -17939,7 +17958,7 @@ export namespace Prisma {
     purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    customerId?: IntFieldUpdateOperationsInput | number
+    customerId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     customerPurchaseItem?: CustomerPurchaseItemUncheckedUpdateManyWithoutCustomerPurchaseNestedInput
@@ -17954,7 +17973,7 @@ export namespace Prisma {
     purchasedAt?: Date | string
     taxAmount?: number | null
     discountAmount?: number | null
-    customerId: number
+    customerId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -17980,7 +17999,7 @@ export namespace Prisma {
     purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    customerId?: IntFieldUpdateOperationsInput | number
+    customerId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19179,9 +19198,9 @@ export namespace Prisma {
     not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
   }
 
-  export type CustomerScalarRelationFilter = {
-    is?: CustomerWhereInput
-    isNot?: CustomerWhereInput
+  export type CustomerNullableScalarRelationFilter = {
+    is?: CustomerWhereInput | null
+    isNot?: CustomerWhereInput | null
   }
 
   export type CustomerPurchaseOrderByRelevanceInput = {
@@ -19969,10 +19988,12 @@ export namespace Prisma {
     set?: $Enums.PaymentMethod
   }
 
-  export type CustomerUpdateOneRequiredWithoutCustomerPurchaseNestedInput = {
+  export type CustomerUpdateOneWithoutCustomerPurchaseNestedInput = {
     create?: XOR<CustomerCreateWithoutCustomerPurchaseInput, CustomerUncheckedCreateWithoutCustomerPurchaseInput>
     connectOrCreate?: CustomerCreateOrConnectWithoutCustomerPurchaseInput
     upsert?: CustomerUpsertWithoutCustomerPurchaseInput
+    disconnect?: CustomerWhereInput | boolean
+    delete?: CustomerWhereInput | boolean
     connect?: CustomerWhereUniqueInput
     update?: XOR<XOR<CustomerUpdateToOneWithWhereWithoutCustomerPurchaseInput, CustomerUpdateWithoutCustomerPurchaseInput>, CustomerUncheckedUpdateWithoutCustomerPurchaseInput>
   }
@@ -21563,7 +21584,7 @@ export namespace Prisma {
     purchasedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     taxAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
     discountAmount?: FloatNullableFilter<"CustomerPurchase"> | number | null
-    customerId?: IntFilter<"CustomerPurchase"> | number
+    customerId?: IntNullableFilter<"CustomerPurchase"> | number | null
     createdAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
     updatedAt?: DateTimeFilter<"CustomerPurchase"> | Date | string
   }
@@ -21725,7 +21746,7 @@ export namespace Prisma {
     discountAmount?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    customer: CustomerCreateNestedOneWithoutCustomerPurchaseInput
+    customer?: CustomerCreateNestedOneWithoutCustomerPurchaseInput
   }
 
   export type CustomerPurchaseUncheckedCreateWithoutCustomerPurchaseItemInput = {
@@ -21737,7 +21758,7 @@ export namespace Prisma {
     purchasedAt?: Date | string
     taxAmount?: number | null
     discountAmount?: number | null
-    customerId: number
+    customerId?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21824,7 +21845,7 @@ export namespace Prisma {
     discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    customer?: CustomerUpdateOneRequiredWithoutCustomerPurchaseNestedInput
+    customer?: CustomerUpdateOneWithoutCustomerPurchaseNestedInput
   }
 
   export type CustomerPurchaseUncheckedUpdateWithoutCustomerPurchaseItemInput = {
@@ -21836,7 +21857,7 @@ export namespace Prisma {
     purchasedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
     discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
-    customerId?: IntFieldUpdateOperationsInput | number
+    customerId?: NullableIntFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

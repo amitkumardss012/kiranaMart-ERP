@@ -47,7 +47,7 @@ const purchaseItemSchema = z.object({
 });
 
 export const customerPurchaseValidator = z.object({
-  customerId: z.number().int().positive("Customer ID is required"),
+  customerId: z.number().int().optional(),
   totalAmount: z.number().positive("Total amount must be a positive number"),
   purchaseStatus: purchaseStatusEnum.optional(), // defaults handled by Prisma
   paymentMethod: paymentMethodEnum,

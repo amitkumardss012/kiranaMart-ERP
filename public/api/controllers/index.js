@@ -33,7 +33,7 @@ var __importStar = (this && this.__importStar) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DiscountController = exports.SubCategoryController = exports.CatSubController = exports.ProductController = exports.EmployeeController = exports.EmployeeRoleController = exports.StoreController = exports.AdminController = void 0;
+exports.CustomerController = exports.CustomerPurchaseController = exports.DiscountController = exports.SubCategoryController = exports.CatSubController = exports.ProductController = exports.EmployeeController = exports.EmployeeRoleController = exports.StoreController = exports.AdminController = void 0;
 const AdminController = __importStar(require("./admin.controller"));
 exports.AdminController = AdminController;
 const StoreController = __importStar(require("./store.controller"));
@@ -50,3 +50,7 @@ const SubCategoryController = __importStar(require("./subCategory.controller"));
 exports.SubCategoryController = SubCategoryController;
 const DiscountController = __importStar(require("./discount.controller"));
 exports.DiscountController = DiscountController;
+const CustomerPurchaseController = __importStar(require("./customerPurchase.controller"));
+exports.CustomerPurchaseController = CustomerPurchaseController;
+const CustomerController = __importStar(require("./customer.controller"));
+exports.CustomerController = CustomerController;

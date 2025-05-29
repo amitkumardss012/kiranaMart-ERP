@@ -14,6 +14,7 @@ const controllers_1 = require("../controllers");
 const productRoute = (app) => __awaiter(void 0, void 0, void 0, function* () {
     app.post("/create", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.ProductController.listProduct);
     app.get("/all", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.ProductController.getAllProducts);
+    app.get("/barcode/:barcode", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.ProductController.getProductByBarCode);
     app.get("/:id", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.ProductController.getProductById);
     app.post("/:id", { preHandler: [auth_middleware_1.authenticatAdmin] }, controllers_1.ProductController.updateProduct);
 });

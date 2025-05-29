@@ -68,20 +68,14 @@ export const ProductValidator = z.object({
 
   categoryId: z
     .number()
-    .int("Category ID must be an integer")
-    .positive("Category ID must be a positive number")
     .optional(),
 
   subCategoryId: z
     .number()
-    .int("Sub-category ID must be an integer")
-    .positive("Sub-category ID must be a positive number")
     .optional(),
 
   discountId: z
     .number()
-    .int("Discount ID must be an integer")
-    .positive("Discount ID must be a positive number")
     .optional(),
 });
 

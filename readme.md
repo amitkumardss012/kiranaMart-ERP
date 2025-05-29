@@ -1,23 +1,23 @@
 FROM node:20-alpine AS builder
 
-
+# Enable pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
 WORKDIR /build
 
-
+# Copy dependency-related files
 COPY package.json pnpm-lock.yaml ./
 
-
+# 🔧 COPY Prisma schema early for postinstall .to work
 COPY prisma ./prisma
 
-
+# Install dependencies (runs prisma generate via postinstall)
 RUN pnpm install --frozen-lockfile
 
-
+# Copy the rest of the app
 COPY . .
 
-
+# Build the app
 RUN pnpm run build
 
 # --- Runtime Image ---

@@ -89,6 +89,7 @@ export const getAllSubCategory = asyncHandler(
         limit: string;
         isActive: string;
         searchQuery: string;
+        categoryId: string;
       };
     }>,
     reply
@@ -102,6 +103,7 @@ export const getAllSubCategory = asyncHandler(
         : undefined;
 
     const searchQuery = req.query.searchQuery || "";
+    const categoryId = Number(req.query.categoryId) || undefined;
 
     const skip = (page - 1) * limit;
 
@@ -115,6 +117,10 @@ export const getAllSubCategory = asyncHandler(
 
     if (isActive !== undefined) {
       where.isActive = isActive;
+    }
+
+    if (categoryId) {
+      where.categoryId = categoryId;
     }
 
     const [subCategories, totalSubCategories] = await Promise.all([

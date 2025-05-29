@@ -88,6 +88,7 @@ exports.getAllSubCategory = (0, asyncHandler_1.asyncHandler)((req, reply) => __a
         ? req.query.isActive === "true"
         : undefined;
     const searchQuery = req.query.searchQuery || "";
+    const categoryId = Number(req.query.categoryId) || undefined;
     const skip = (page - 1) * limit;
     const where = {};
     if (searchQuery) {
@@ -97,6 +98,9 @@ exports.getAllSubCategory = (0, asyncHandler_1.asyncHandler)((req, reply) => __a
     }
     if (isActive !== undefined) {
         where.isActive = isActive;
+    }
+    if (categoryId) {
+        where.categoryId = categoryId;
     }
     const [subCategories, totalSubCategories] = yield Promise.all([
         config_1.prisma.subCategory.findMany({
@@ -141,7 +145,7 @@ exports.updateSubCategory = (0, asyncHandler_1.asyncHandler)((req, reply) => __a
     if (!id || isNaN(id)) {
         throw new response_util_1.ErrorResponse("Invalid id", types_1.statusCode.Bad_Request);
     }
-    const validData = subCategroy_validator_1.SubCategoryValidator.safeParse(req.body);
+    const validData = subCategroy_validator_1.SubCategoryValidator.partial().safeParse(req.body);
     if (!validData.success) {
         return reply.status(400).send({
             success: false,
