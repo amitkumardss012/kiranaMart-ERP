@@ -9,6 +9,7 @@ import subCategoryRoutes from "./subCategroy.routes";
 import discountRoute from "./discount.routes";
 import CustomerPurchaseRoute from "./customerPurchase.routes";
 import CustomerRoute from "./customer.routes";
+import CompanyPurchaseRoute from "./companyPurchase.route";
 
 const index = (app: FastifyInstance) => {
     app.register(adminRoute, { prefix: "/admin" });
@@ -21,6 +22,7 @@ const index = (app: FastifyInstance) => {
     app.register(discountRoute, { prefix: "/discount" })
     app.register(CustomerRoute, { prefix: "/customer" })
     app.register(CustomerPurchaseRoute, { prefix: "/customer-purchase" })
+    app.register(CompanyPurchaseRoute, { prefix: "/company-purchase" })
 }
 
 export default index

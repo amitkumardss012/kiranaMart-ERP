@@ -117,12 +117,28 @@ export const OrderProduct = asyncHandler(
 export const getAllCustomerPurchases = asyncHandler(
   async (req: FastifyRequest<{ Querystring: { page: number, limit: number } }>, reply) => {
     
-    const { page = 1, limit = 10 } = req.query;
+    const page = Number(req.query.page) || 1
+    const limit = Number(req.query.limit) || 10;
+    if (page < 1 || limit < 1) {
+      return reply.status(statusCode.Bad_Request).send({
+        success: false,
+        message: "Page and limit must be greater than 0",
+      });
+    }
 
     const purchases = await prisma.customerPurchase.findMany({
       include: {
-        customerPurchaseItem: true,
         customer: true,
+        customerPurchaseItem: {
+          include: {
+            product: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          }
+        },
       },
       orderBy: { purchasedAt: "desc" },
       skip: (page - 1) * limit,
@@ -156,7 +172,6 @@ export const GetCustomerPurchases = asyncHandler(
       where: { customerId },
       include: {
         customerPurchaseItem: true,
-        customer: true,
       },
       orderBy: { purchasedAt: "desc" },
     });
@@ -205,9 +220,14 @@ export const deleteCustomerPurchase = asyncHandler(
       });
     }
 
+    await prisma.customerPurchaseItem.deleteMany({
+      where: { customerPurchaseId: id },
+    });
+    
     await prisma.customerPurchase.delete({
       where: { id },
     });
+    
 
     return SuccessResponse(reply, "Purchase deleted successfully");
   }

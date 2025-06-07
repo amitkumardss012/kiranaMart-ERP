@@ -8,6 +8,7 @@ import * as SubCategoryController from "./subCategory.controller";
 import * as DiscountController from "./discount.controller";
 import * as CustomerPurchaseController from "./customerPurchase.controller";
 import * as CustomerController from "./customer.controller";
+import * as CompanyPurchaseController from "./companyPurchase.controller";
 
 
 export {
@@ -21,4 +22,5 @@ export {
   DiscountController,
   CustomerPurchaseController,
   CustomerController,
+  CompanyPurchaseController,
 };
