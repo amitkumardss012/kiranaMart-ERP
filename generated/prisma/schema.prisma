@@ -110,7 +110,8 @@ model Store {
   updatedAt                 DateTime    @updatedAt
 
   // Relations
-  employees Employee[] @relation("EmployeeAccessStores")
+  employees        Employee[]        @relation("EmployeeAccessStores")
+  companyPurchases companyPurchase[]
 }
 
 // Enumm
@@ -306,4 +307,38 @@ model CustomerPurchaseItem {
 
   @@unique([customerPurchaseId, productId])
   @@index([customerPurchaseId])
+}
+
+model companyPurchase {
+  id             Int           @id @default(autoincrement())
+  invoiceNumber  String        @unique
+  supplierName   String
+  purchaseDate   DateTime
+  receivedDate   DateTime?
+  productName    String
+  quantity       Int
+  unitPrice      Float
+  taxAmount      Float?
+  discountAmount Float?
+  paymentStatus  PaymentStatus @default(UNPAID)
+  paymentMethod  PaymentMode   @default(CASH)
+  remarks        String?
+
+  storeId Int
+  store   Store @relation(fields: [storeId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PaymentStatus {
+  PAID
+  UNPAID
+}
+
+enum PaymentMode {
+  CASH
+  CARD
+  UPI
+  OTHER
 }

@@ -70,9 +70,9 @@ export const ProductValidator = z.object({
     .number()
     .optional(),
 
-  subCategoryId: z
-    .number()
-    .optional(),
+  // subCategoryId: z
+  //   .number()
+  //   .optional(),
 
   discountId: z
     .number()

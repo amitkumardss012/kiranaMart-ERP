@@ -301,6 +301,25 @@ exports.Prisma.CustomerPurchaseItemScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.CompanyPurchaseScalarFieldEnum = {
+  id: 'id',
+  invoiceNumber: 'invoiceNumber',
+  supplierName: 'supplierName',
+  purchaseDate: 'purchaseDate',
+  receivedDate: 'receivedDate',
+  productName: 'productName',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  taxAmount: 'taxAmount',
+  discountAmount: 'discountAmount',
+  paymentStatus: 'paymentStatus',
+  paymentMethod: 'paymentMethod',
+  remarks: 'remarks',
+  storeId: 'storeId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -400,6 +419,13 @@ exports.Prisma.CustomerOrderByRelevanceFieldEnum = {
 exports.Prisma.CustomerPurchaseOrderByRelevanceFieldEnum = {
   transactionId: 'transactionId'
 };
+
+exports.Prisma.companyPurchaseOrderByRelevanceFieldEnum = {
+  invoiceNumber: 'invoiceNumber',
+  supplierName: 'supplierName',
+  productName: 'productName',
+  remarks: 'remarks'
+};
 exports.Role = exports.$Enums.Role = {
   SUPER_ADMIN: 'SUPER_ADMIN',
   ADMIN: 'ADMIN'
@@ -458,6 +484,18 @@ exports.PaymentMethod = exports.$Enums.PaymentMethod = {
   OTHER: 'OTHER'
 };
 
+exports.PaymentStatus = exports.$Enums.PaymentStatus = {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
+
+exports.PaymentMode = exports.$Enums.PaymentMode = {
+  CASH: 'CASH',
+  CARD: 'CARD',
+  UPI: 'UPI',
+  OTHER: 'OTHER'
+};
+
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Employee: 'Employee',
@@ -470,7 +508,8 @@ exports.Prisma.ModelName = {
   SubCategory: 'SubCategory',
   Customer: 'Customer',
   CustomerPurchase: 'CustomerPurchase',
-  CustomerPurchaseItem: 'CustomerPurchaseItem'
+  CustomerPurchaseItem: 'CustomerPurchaseItem',
+  companyPurchase: 'companyPurchase'
 };
 
 /**

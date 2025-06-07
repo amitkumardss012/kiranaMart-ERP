@@ -112,4 +112,103 @@ export const OrderProduct = asyncHandler(
       purchase
     )
   }
+)
+
+export const getAllCustomerPurchases = asyncHandler(
+  async (req: FastifyRequest<{ Querystring: { page: number, limit: number } }>, reply) => {
+    
+    const { page = 1, limit = 10 } = req.query;
+
+    const purchases = await prisma.customerPurchase.findMany({
+      include: {
+        customerPurchaseItem: true,
+        customer: true,
+      },
+      orderBy: { purchasedAt: "desc" },
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+    const totalCount = await prisma.customerPurchase.count();
+
+    const totalPages = Math.ceil(totalCount / limit);
+
+    return SuccessResponse(reply, "Customer purchases retrieved successfully", {
+      purchases,
+      currentPage: page,
+      totalPages,
+      totalPurchases: totalCount,
+      count: purchases.length,
+    });
+  })
+
+export const GetCustomerPurchases = asyncHandler(
+  async (req: FastifyRequest<{ Params: { customerId: string } }>, reply) => {
+    const customerId  = Number(req.params.customerId);
+
+    if (!customerId) {
+      return reply.status(statusCode.Bad_Request).send({
+        success: false,
+        message: "Customer ID is required",
+      });
+    }
+
+    const purchases = await prisma.customerPurchase.findMany({
+      where: { customerId },
+      include: {
+        customerPurchaseItem: true,
+        customer: true,
+      },
+      orderBy: { purchasedAt: "desc" },
+    });
+
+    return SuccessResponse(reply, "Customer purchases retrieved successfully", purchases);
+  }
+);
+
+
+export const getCustomerPurchaseById = asyncHandler(
+  async (req: FastifyRequest<{ Params: { id: string } }>, reply) => {
+    const id = Number(req.params.id);
+    if (!id || isNaN(id))
+      throw new ErrorResponse("Invalid id", statusCode.Bad_Request);
+    const purchase = await prisma.customerPurchase.findUnique({
+      where: { id },
+      include: {
+        customerPurchaseItem: true,
+        customer: true,
+      },
+    });
+    if (!purchase)
+      throw new ErrorResponse("Purchase not found", statusCode.Not_Found);
+    return SuccessResponse(reply, "Purchase fetched successfully", purchase);
+  }
+);
+
+export const deleteCustomerPurchase = asyncHandler(
+  async (req: FastifyRequest<{ Params: { id: string } }>, reply) => {
+    const id = Number(req.params.id);
+    if (!id || isNaN(id)) {
+      return reply.status(statusCode.Bad_Request).send({
+        success: false,
+        message: "Invalid purchase ID",
+      });
+    }
+
+    const purchase = await prisma.customerPurchase.findUnique({
+      where: { id },
+    });
+
+    if (!purchase) {
+      return reply.status(statusCode.Not_Found).send({
+        success: false,
+        message: "Purchase not found",
+      });
+    }
+
+    await prisma.customerPurchase.delete({
+      where: { id },
+    });
+
+    return SuccessResponse(reply, "Purchase deleted successfully");
+  }
 );

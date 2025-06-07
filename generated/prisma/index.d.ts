@@ -73,6 +73,11 @@ export type CustomerPurchase = $Result.DefaultSelection<Prisma.$CustomerPurchase
  * 
  */
 export type CustomerPurchaseItem = $Result.DefaultSelection<Prisma.$CustomerPurchaseItemPayload>
+/**
+ * Model companyPurchase
+ * 
+ */
+export type companyPurchase = $Result.DefaultSelection<Prisma.$companyPurchasePayload>
 
 /**
  * Enums
@@ -162,6 +167,24 @@ export const PaymentMethod: {
 
 export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
 
+
+export const PaymentStatus: {
+  PAID: 'PAID',
+  UNPAID: 'UNPAID'
+};
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const PaymentMode: {
+  CASH: 'CASH',
+  CARD: 'CARD',
+  UPI: 'UPI',
+  OTHER: 'OTHER'
+};
+
+export type PaymentMode = (typeof PaymentMode)[keyof typeof PaymentMode]
+
 }
 
 export type Role = $Enums.Role
@@ -199,6 +222,14 @@ export const PurchaseStatus: typeof $Enums.PurchaseStatus
 export type PaymentMethod = $Enums.PaymentMethod
 
 export const PaymentMethod: typeof $Enums.PaymentMethod
+
+export type PaymentStatus = $Enums.PaymentStatus
+
+export const PaymentStatus: typeof $Enums.PaymentStatus
+
+export type PaymentMode = $Enums.PaymentMode
+
+export const PaymentMode: typeof $Enums.PaymentMode
 
 /**
  * ##  Prisma Client ʲˢ
@@ -444,6 +475,16 @@ export class PrismaClient<
     * ```
     */
   get customerPurchaseItem(): Prisma.CustomerPurchaseItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.companyPurchase`: Exposes CRUD operations for the **companyPurchase** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CompanyPurchases
+    * const companyPurchases = await prisma.companyPurchase.findMany()
+    * ```
+    */
+  get companyPurchase(): Prisma.companyPurchaseDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -895,7 +936,8 @@ export namespace Prisma {
     SubCategory: 'SubCategory',
     Customer: 'Customer',
     CustomerPurchase: 'CustomerPurchase',
-    CustomerPurchaseItem: 'CustomerPurchaseItem'
+    CustomerPurchaseItem: 'CustomerPurchaseItem',
+    companyPurchase: 'companyPurchase'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -914,7 +956,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "admin" | "employee" | "store" | "employeeRole" | "permission" | "product" | "discount" | "category" | "subCategory" | "customer" | "customerPurchase" | "customerPurchaseItem"
+      modelProps: "admin" | "employee" | "store" | "employeeRole" | "permission" | "product" | "discount" | "category" | "subCategory" | "customer" | "customerPurchase" | "customerPurchaseItem" | "companyPurchase"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1710,6 +1752,72 @@ export namespace Prisma {
           }
         }
       }
+      companyPurchase: {
+        payload: Prisma.$companyPurchasePayload<ExtArgs>
+        fields: Prisma.companyPurchaseFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.companyPurchaseFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.companyPurchaseFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          findFirst: {
+            args: Prisma.companyPurchaseFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.companyPurchaseFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          findMany: {
+            args: Prisma.companyPurchaseFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>[]
+          }
+          create: {
+            args: Prisma.companyPurchaseCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          createMany: {
+            args: Prisma.companyPurchaseCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.companyPurchaseDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          update: {
+            args: Prisma.companyPurchaseUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          deleteMany: {
+            args: Prisma.companyPurchaseDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.companyPurchaseUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.companyPurchaseUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$companyPurchasePayload>
+          }
+          aggregate: {
+            args: Prisma.CompanyPurchaseAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCompanyPurchase>
+          }
+          groupBy: {
+            args: Prisma.companyPurchaseGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CompanyPurchaseGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.companyPurchaseCountArgs<ExtArgs>
+            result: $Utils.Optional<CompanyPurchaseCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1806,6 +1914,7 @@ export namespace Prisma {
     customer?: CustomerOmit
     customerPurchase?: CustomerPurchaseOmit
     customerPurchaseItem?: CustomerPurchaseItemOmit
+    companyPurchase?: companyPurchaseOmit
   }
 
   /* Types for Logging */
@@ -1932,10 +2041,12 @@ export namespace Prisma {
 
   export type StoreCountOutputType = {
     employees: number
+    companyPurchases: number
   }
 
   export type StoreCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     employees?: boolean | StoreCountOutputTypeCountEmployeesArgs
+    companyPurchases?: boolean | StoreCountOutputTypeCountCompanyPurchasesArgs
   }
 
   // Custom InputTypes
@@ -1954,6 +2065,13 @@ export namespace Prisma {
    */
   export type StoreCountOutputTypeCountEmployeesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: EmployeeWhereInput
+  }
+
+  /**
+   * StoreCountOutputType without action
+   */
+  export type StoreCountOutputTypeCountCompanyPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyPurchaseWhereInput
   }
 
 
@@ -4855,6 +4973,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     employees?: boolean | Store$employeesArgs<ExtArgs>
+    companyPurchases?: boolean | Store$companyPurchasesArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["store"]>
 
@@ -4884,6 +5003,7 @@ export namespace Prisma {
   export type StoreOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "address" | "city" | "state" | "country" | "pincode" | "contactNumber" | "email" | "isActive" | "isOpen" | "isOnlineDeliveryAvailable" | "status" | "type" | "latitude" | "longitude" | "createdAt" | "updatedAt", ExtArgs["result"]["store"]>
   export type StoreInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     employees?: boolean | Store$employeesArgs<ExtArgs>
+    companyPurchases?: boolean | Store$companyPurchasesArgs<ExtArgs>
     _count?: boolean | StoreCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4891,6 +5011,7 @@ export namespace Prisma {
     name: "Store"
     objects: {
       employees: Prisma.$EmployeePayload<ExtArgs>[]
+      companyPurchases: Prisma.$companyPurchasePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5252,6 +5373,7 @@ export namespace Prisma {
   export interface Prisma__StoreClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     employees<T extends Store$employeesArgs<ExtArgs> = {}>(args?: Subset<T, Store$employeesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    companyPurchases<T extends Store$companyPurchasesArgs<ExtArgs> = {}>(args?: Subset<T, Store$companyPurchasesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5663,6 +5785,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: EmployeeScalarFieldEnum | EmployeeScalarFieldEnum[]
+  }
+
+  /**
+   * Store.companyPurchases
+   */
+  export type Store$companyPurchasesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    where?: companyPurchaseWhereInput
+    orderBy?: companyPurchaseOrderByWithRelationInput | companyPurchaseOrderByWithRelationInput[]
+    cursor?: companyPurchaseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompanyPurchaseScalarFieldEnum | CompanyPurchaseScalarFieldEnum[]
   }
 
   /**
@@ -15192,6 +15338,1110 @@ export namespace Prisma {
 
 
   /**
+   * Model companyPurchase
+   */
+
+  export type AggregateCompanyPurchase = {
+    _count: CompanyPurchaseCountAggregateOutputType | null
+    _avg: CompanyPurchaseAvgAggregateOutputType | null
+    _sum: CompanyPurchaseSumAggregateOutputType | null
+    _min: CompanyPurchaseMinAggregateOutputType | null
+    _max: CompanyPurchaseMaxAggregateOutputType | null
+  }
+
+  export type CompanyPurchaseAvgAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    unitPrice: number | null
+    taxAmount: number | null
+    discountAmount: number | null
+    storeId: number | null
+  }
+
+  export type CompanyPurchaseSumAggregateOutputType = {
+    id: number | null
+    quantity: number | null
+    unitPrice: number | null
+    taxAmount: number | null
+    discountAmount: number | null
+    storeId: number | null
+  }
+
+  export type CompanyPurchaseMinAggregateOutputType = {
+    id: number | null
+    invoiceNumber: string | null
+    supplierName: string | null
+    purchaseDate: Date | null
+    receivedDate: Date | null
+    productName: string | null
+    quantity: number | null
+    unitPrice: number | null
+    taxAmount: number | null
+    discountAmount: number | null
+    paymentStatus: $Enums.PaymentStatus | null
+    paymentMethod: $Enums.PaymentMode | null
+    remarks: string | null
+    storeId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CompanyPurchaseMaxAggregateOutputType = {
+    id: number | null
+    invoiceNumber: string | null
+    supplierName: string | null
+    purchaseDate: Date | null
+    receivedDate: Date | null
+    productName: string | null
+    quantity: number | null
+    unitPrice: number | null
+    taxAmount: number | null
+    discountAmount: number | null
+    paymentStatus: $Enums.PaymentStatus | null
+    paymentMethod: $Enums.PaymentMode | null
+    remarks: string | null
+    storeId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type CompanyPurchaseCountAggregateOutputType = {
+    id: number
+    invoiceNumber: number
+    supplierName: number
+    purchaseDate: number
+    receivedDate: number
+    productName: number
+    quantity: number
+    unitPrice: number
+    taxAmount: number
+    discountAmount: number
+    paymentStatus: number
+    paymentMethod: number
+    remarks: number
+    storeId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type CompanyPurchaseAvgAggregateInputType = {
+    id?: true
+    quantity?: true
+    unitPrice?: true
+    taxAmount?: true
+    discountAmount?: true
+    storeId?: true
+  }
+
+  export type CompanyPurchaseSumAggregateInputType = {
+    id?: true
+    quantity?: true
+    unitPrice?: true
+    taxAmount?: true
+    discountAmount?: true
+    storeId?: true
+  }
+
+  export type CompanyPurchaseMinAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    supplierName?: true
+    purchaseDate?: true
+    receivedDate?: true
+    productName?: true
+    quantity?: true
+    unitPrice?: true
+    taxAmount?: true
+    discountAmount?: true
+    paymentStatus?: true
+    paymentMethod?: true
+    remarks?: true
+    storeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CompanyPurchaseMaxAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    supplierName?: true
+    purchaseDate?: true
+    receivedDate?: true
+    productName?: true
+    quantity?: true
+    unitPrice?: true
+    taxAmount?: true
+    discountAmount?: true
+    paymentStatus?: true
+    paymentMethod?: true
+    remarks?: true
+    storeId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type CompanyPurchaseCountAggregateInputType = {
+    id?: true
+    invoiceNumber?: true
+    supplierName?: true
+    purchaseDate?: true
+    receivedDate?: true
+    productName?: true
+    quantity?: true
+    unitPrice?: true
+    taxAmount?: true
+    discountAmount?: true
+    paymentStatus?: true
+    paymentMethod?: true
+    remarks?: true
+    storeId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type CompanyPurchaseAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyPurchase to aggregate.
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyPurchases to fetch.
+     */
+    orderBy?: companyPurchaseOrderByWithRelationInput | companyPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: companyPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned companyPurchases
+    **/
+    _count?: true | CompanyPurchaseCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CompanyPurchaseAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CompanyPurchaseSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CompanyPurchaseMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CompanyPurchaseMaxAggregateInputType
+  }
+
+  export type GetCompanyPurchaseAggregateType<T extends CompanyPurchaseAggregateArgs> = {
+        [P in keyof T & keyof AggregateCompanyPurchase]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCompanyPurchase[P]>
+      : GetScalarType<T[P], AggregateCompanyPurchase[P]>
+  }
+
+
+
+
+  export type companyPurchaseGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: companyPurchaseWhereInput
+    orderBy?: companyPurchaseOrderByWithAggregationInput | companyPurchaseOrderByWithAggregationInput[]
+    by: CompanyPurchaseScalarFieldEnum[] | CompanyPurchaseScalarFieldEnum
+    having?: companyPurchaseScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CompanyPurchaseCountAggregateInputType | true
+    _avg?: CompanyPurchaseAvgAggregateInputType
+    _sum?: CompanyPurchaseSumAggregateInputType
+    _min?: CompanyPurchaseMinAggregateInputType
+    _max?: CompanyPurchaseMaxAggregateInputType
+  }
+
+  export type CompanyPurchaseGroupByOutputType = {
+    id: number
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date
+    receivedDate: Date | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount: number | null
+    discountAmount: number | null
+    paymentStatus: $Enums.PaymentStatus
+    paymentMethod: $Enums.PaymentMode
+    remarks: string | null
+    storeId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: CompanyPurchaseCountAggregateOutputType | null
+    _avg: CompanyPurchaseAvgAggregateOutputType | null
+    _sum: CompanyPurchaseSumAggregateOutputType | null
+    _min: CompanyPurchaseMinAggregateOutputType | null
+    _max: CompanyPurchaseMaxAggregateOutputType | null
+  }
+
+  type GetCompanyPurchaseGroupByPayload<T extends companyPurchaseGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CompanyPurchaseGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CompanyPurchaseGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CompanyPurchaseGroupByOutputType[P]>
+            : GetScalarType<T[P], CompanyPurchaseGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type companyPurchaseSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceNumber?: boolean
+    supplierName?: boolean
+    purchaseDate?: boolean
+    receivedDate?: boolean
+    productName?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    taxAmount?: boolean
+    discountAmount?: boolean
+    paymentStatus?: boolean
+    paymentMethod?: boolean
+    remarks?: boolean
+    storeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["companyPurchase"]>
+
+
+
+  export type companyPurchaseSelectScalar = {
+    id?: boolean
+    invoiceNumber?: boolean
+    supplierName?: boolean
+    purchaseDate?: boolean
+    receivedDate?: boolean
+    productName?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    taxAmount?: boolean
+    discountAmount?: boolean
+    paymentStatus?: boolean
+    paymentMethod?: boolean
+    remarks?: boolean
+    storeId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type companyPurchaseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceNumber" | "supplierName" | "purchaseDate" | "receivedDate" | "productName" | "quantity" | "unitPrice" | "taxAmount" | "discountAmount" | "paymentStatus" | "paymentMethod" | "remarks" | "storeId" | "createdAt" | "updatedAt", ExtArgs["result"]["companyPurchase"]>
+  export type companyPurchaseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    store?: boolean | StoreDefaultArgs<ExtArgs>
+  }
+
+  export type $companyPurchasePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "companyPurchase"
+    objects: {
+      store: Prisma.$StorePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      invoiceNumber: string
+      supplierName: string
+      purchaseDate: Date
+      receivedDate: Date | null
+      productName: string
+      quantity: number
+      unitPrice: number
+      taxAmount: number | null
+      discountAmount: number | null
+      paymentStatus: $Enums.PaymentStatus
+      paymentMethod: $Enums.PaymentMode
+      remarks: string | null
+      storeId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["companyPurchase"]>
+    composites: {}
+  }
+
+  type companyPurchaseGetPayload<S extends boolean | null | undefined | companyPurchaseDefaultArgs> = $Result.GetResult<Prisma.$companyPurchasePayload, S>
+
+  type companyPurchaseCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<companyPurchaseFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CompanyPurchaseCountAggregateInputType | true
+    }
+
+  export interface companyPurchaseDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['companyPurchase'], meta: { name: 'companyPurchase' } }
+    /**
+     * Find zero or one CompanyPurchase that matches the filter.
+     * @param {companyPurchaseFindUniqueArgs} args - Arguments to find a CompanyPurchase
+     * @example
+     * // Get one CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends companyPurchaseFindUniqueArgs>(args: SelectSubset<T, companyPurchaseFindUniqueArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CompanyPurchase that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {companyPurchaseFindUniqueOrThrowArgs} args - Arguments to find a CompanyPurchase
+     * @example
+     * // Get one CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends companyPurchaseFindUniqueOrThrowArgs>(args: SelectSubset<T, companyPurchaseFindUniqueOrThrowArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyPurchase that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseFindFirstArgs} args - Arguments to find a CompanyPurchase
+     * @example
+     * // Get one CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends companyPurchaseFindFirstArgs>(args?: SelectSubset<T, companyPurchaseFindFirstArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CompanyPurchase that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseFindFirstOrThrowArgs} args - Arguments to find a CompanyPurchase
+     * @example
+     * // Get one CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends companyPurchaseFindFirstOrThrowArgs>(args?: SelectSubset<T, companyPurchaseFindFirstOrThrowArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CompanyPurchases that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CompanyPurchases
+     * const companyPurchases = await prisma.companyPurchase.findMany()
+     * 
+     * // Get first 10 CompanyPurchases
+     * const companyPurchases = await prisma.companyPurchase.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const companyPurchaseWithIdOnly = await prisma.companyPurchase.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends companyPurchaseFindManyArgs>(args?: SelectSubset<T, companyPurchaseFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CompanyPurchase.
+     * @param {companyPurchaseCreateArgs} args - Arguments to create a CompanyPurchase.
+     * @example
+     * // Create one CompanyPurchase
+     * const CompanyPurchase = await prisma.companyPurchase.create({
+     *   data: {
+     *     // ... data to create a CompanyPurchase
+     *   }
+     * })
+     * 
+     */
+    create<T extends companyPurchaseCreateArgs>(args: SelectSubset<T, companyPurchaseCreateArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CompanyPurchases.
+     * @param {companyPurchaseCreateManyArgs} args - Arguments to create many CompanyPurchases.
+     * @example
+     * // Create many CompanyPurchases
+     * const companyPurchase = await prisma.companyPurchase.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends companyPurchaseCreateManyArgs>(args?: SelectSubset<T, companyPurchaseCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a CompanyPurchase.
+     * @param {companyPurchaseDeleteArgs} args - Arguments to delete one CompanyPurchase.
+     * @example
+     * // Delete one CompanyPurchase
+     * const CompanyPurchase = await prisma.companyPurchase.delete({
+     *   where: {
+     *     // ... filter to delete one CompanyPurchase
+     *   }
+     * })
+     * 
+     */
+    delete<T extends companyPurchaseDeleteArgs>(args: SelectSubset<T, companyPurchaseDeleteArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CompanyPurchase.
+     * @param {companyPurchaseUpdateArgs} args - Arguments to update one CompanyPurchase.
+     * @example
+     * // Update one CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends companyPurchaseUpdateArgs>(args: SelectSubset<T, companyPurchaseUpdateArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CompanyPurchases.
+     * @param {companyPurchaseDeleteManyArgs} args - Arguments to filter CompanyPurchases to delete.
+     * @example
+     * // Delete a few CompanyPurchases
+     * const { count } = await prisma.companyPurchase.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends companyPurchaseDeleteManyArgs>(args?: SelectSubset<T, companyPurchaseDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CompanyPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CompanyPurchases
+     * const companyPurchase = await prisma.companyPurchase.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends companyPurchaseUpdateManyArgs>(args: SelectSubset<T, companyPurchaseUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one CompanyPurchase.
+     * @param {companyPurchaseUpsertArgs} args - Arguments to update or create a CompanyPurchase.
+     * @example
+     * // Update or create a CompanyPurchase
+     * const companyPurchase = await prisma.companyPurchase.upsert({
+     *   create: {
+     *     // ... data to create a CompanyPurchase
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CompanyPurchase we want to update
+     *   }
+     * })
+     */
+    upsert<T extends companyPurchaseUpsertArgs>(args: SelectSubset<T, companyPurchaseUpsertArgs<ExtArgs>>): Prisma__companyPurchaseClient<$Result.GetResult<Prisma.$companyPurchasePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CompanyPurchases.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseCountArgs} args - Arguments to filter CompanyPurchases to count.
+     * @example
+     * // Count the number of CompanyPurchases
+     * const count = await prisma.companyPurchase.count({
+     *   where: {
+     *     // ... the filter for the CompanyPurchases we want to count
+     *   }
+     * })
+    **/
+    count<T extends companyPurchaseCountArgs>(
+      args?: Subset<T, companyPurchaseCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CompanyPurchaseCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CompanyPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CompanyPurchaseAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CompanyPurchaseAggregateArgs>(args: Subset<T, CompanyPurchaseAggregateArgs>): Prisma.PrismaPromise<GetCompanyPurchaseAggregateType<T>>
+
+    /**
+     * Group by CompanyPurchase.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {companyPurchaseGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends companyPurchaseGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: companyPurchaseGroupByArgs['orderBy'] }
+        : { orderBy?: companyPurchaseGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, companyPurchaseGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCompanyPurchaseGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the companyPurchase model
+   */
+  readonly fields: companyPurchaseFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for companyPurchase.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__companyPurchaseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    store<T extends StoreDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StoreDefaultArgs<ExtArgs>>): Prisma__StoreClient<$Result.GetResult<Prisma.$StorePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the companyPurchase model
+   */
+  interface companyPurchaseFieldRefs {
+    readonly id: FieldRef<"companyPurchase", 'Int'>
+    readonly invoiceNumber: FieldRef<"companyPurchase", 'String'>
+    readonly supplierName: FieldRef<"companyPurchase", 'String'>
+    readonly purchaseDate: FieldRef<"companyPurchase", 'DateTime'>
+    readonly receivedDate: FieldRef<"companyPurchase", 'DateTime'>
+    readonly productName: FieldRef<"companyPurchase", 'String'>
+    readonly quantity: FieldRef<"companyPurchase", 'Int'>
+    readonly unitPrice: FieldRef<"companyPurchase", 'Float'>
+    readonly taxAmount: FieldRef<"companyPurchase", 'Float'>
+    readonly discountAmount: FieldRef<"companyPurchase", 'Float'>
+    readonly paymentStatus: FieldRef<"companyPurchase", 'PaymentStatus'>
+    readonly paymentMethod: FieldRef<"companyPurchase", 'PaymentMode'>
+    readonly remarks: FieldRef<"companyPurchase", 'String'>
+    readonly storeId: FieldRef<"companyPurchase", 'Int'>
+    readonly createdAt: FieldRef<"companyPurchase", 'DateTime'>
+    readonly updatedAt: FieldRef<"companyPurchase", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * companyPurchase findUnique
+   */
+  export type companyPurchaseFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which companyPurchase to fetch.
+     */
+    where: companyPurchaseWhereUniqueInput
+  }
+
+  /**
+   * companyPurchase findUniqueOrThrow
+   */
+  export type companyPurchaseFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which companyPurchase to fetch.
+     */
+    where: companyPurchaseWhereUniqueInput
+  }
+
+  /**
+   * companyPurchase findFirst
+   */
+  export type companyPurchaseFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which companyPurchase to fetch.
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyPurchases to fetch.
+     */
+    orderBy?: companyPurchaseOrderByWithRelationInput | companyPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyPurchases.
+     */
+    cursor?: companyPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyPurchases.
+     */
+    distinct?: CompanyPurchaseScalarFieldEnum | CompanyPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * companyPurchase findFirstOrThrow
+   */
+  export type companyPurchaseFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which companyPurchase to fetch.
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyPurchases to fetch.
+     */
+    orderBy?: companyPurchaseOrderByWithRelationInput | companyPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for companyPurchases.
+     */
+    cursor?: companyPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyPurchases.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of companyPurchases.
+     */
+    distinct?: CompanyPurchaseScalarFieldEnum | CompanyPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * companyPurchase findMany
+   */
+  export type companyPurchaseFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter, which companyPurchases to fetch.
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of companyPurchases to fetch.
+     */
+    orderBy?: companyPurchaseOrderByWithRelationInput | companyPurchaseOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing companyPurchases.
+     */
+    cursor?: companyPurchaseWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` companyPurchases from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` companyPurchases.
+     */
+    skip?: number
+    distinct?: CompanyPurchaseScalarFieldEnum | CompanyPurchaseScalarFieldEnum[]
+  }
+
+  /**
+   * companyPurchase create
+   */
+  export type companyPurchaseCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to create a companyPurchase.
+     */
+    data: XOR<companyPurchaseCreateInput, companyPurchaseUncheckedCreateInput>
+  }
+
+  /**
+   * companyPurchase createMany
+   */
+  export type companyPurchaseCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many companyPurchases.
+     */
+    data: companyPurchaseCreateManyInput | companyPurchaseCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * companyPurchase update
+   */
+  export type companyPurchaseUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * The data needed to update a companyPurchase.
+     */
+    data: XOR<companyPurchaseUpdateInput, companyPurchaseUncheckedUpdateInput>
+    /**
+     * Choose, which companyPurchase to update.
+     */
+    where: companyPurchaseWhereUniqueInput
+  }
+
+  /**
+   * companyPurchase updateMany
+   */
+  export type companyPurchaseUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update companyPurchases.
+     */
+    data: XOR<companyPurchaseUpdateManyMutationInput, companyPurchaseUncheckedUpdateManyInput>
+    /**
+     * Filter which companyPurchases to update
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * Limit how many companyPurchases to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyPurchase upsert
+   */
+  export type companyPurchaseUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * The filter to search for the companyPurchase to update in case it exists.
+     */
+    where: companyPurchaseWhereUniqueInput
+    /**
+     * In case the companyPurchase found by the `where` argument doesn't exist, create a new companyPurchase with this data.
+     */
+    create: XOR<companyPurchaseCreateInput, companyPurchaseUncheckedCreateInput>
+    /**
+     * In case the companyPurchase was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<companyPurchaseUpdateInput, companyPurchaseUncheckedUpdateInput>
+  }
+
+  /**
+   * companyPurchase delete
+   */
+  export type companyPurchaseDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+    /**
+     * Filter which companyPurchase to delete.
+     */
+    where: companyPurchaseWhereUniqueInput
+  }
+
+  /**
+   * companyPurchase deleteMany
+   */
+  export type companyPurchaseDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which companyPurchases to delete
+     */
+    where?: companyPurchaseWhereInput
+    /**
+     * Limit how many companyPurchases to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * companyPurchase without action
+   */
+  export type companyPurchaseDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the companyPurchase
+     */
+    select?: companyPurchaseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the companyPurchase
+     */
+    omit?: companyPurchaseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: companyPurchaseInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -15422,6 +16672,28 @@ export namespace Prisma {
   export type CustomerPurchaseItemScalarFieldEnum = (typeof CustomerPurchaseItemScalarFieldEnum)[keyof typeof CustomerPurchaseItemScalarFieldEnum]
 
 
+  export const CompanyPurchaseScalarFieldEnum: {
+    id: 'id',
+    invoiceNumber: 'invoiceNumber',
+    supplierName: 'supplierName',
+    purchaseDate: 'purchaseDate',
+    receivedDate: 'receivedDate',
+    productName: 'productName',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    taxAmount: 'taxAmount',
+    discountAmount: 'discountAmount',
+    paymentStatus: 'paymentStatus',
+    paymentMethod: 'paymentMethod',
+    remarks: 'remarks',
+    storeId: 'storeId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type CompanyPurchaseScalarFieldEnum = (typeof CompanyPurchaseScalarFieldEnum)[keyof typeof CompanyPurchaseScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -15561,6 +16833,16 @@ export namespace Prisma {
   export type CustomerPurchaseOrderByRelevanceFieldEnum = (typeof CustomerPurchaseOrderByRelevanceFieldEnum)[keyof typeof CustomerPurchaseOrderByRelevanceFieldEnum]
 
 
+  export const companyPurchaseOrderByRelevanceFieldEnum: {
+    invoiceNumber: 'invoiceNumber',
+    supplierName: 'supplierName',
+    productName: 'productName',
+    remarks: 'remarks'
+  };
+
+  export type companyPurchaseOrderByRelevanceFieldEnum = (typeof companyPurchaseOrderByRelevanceFieldEnum)[keyof typeof companyPurchaseOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -15661,6 +16943,20 @@ export namespace Prisma {
    * Reference to a field of type 'PaymentMethod'
    */
   export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentStatus'
+   */
+  export type EnumPaymentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentMode'
+   */
+  export type EnumPaymentModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMode'>
     
   /**
    * Deep Input Types
@@ -15986,6 +17282,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
     employees?: EmployeeListRelationFilter
+    companyPurchases?: CompanyPurchaseListRelationFilter
   }
 
   export type StoreOrderByWithRelationInput = {
@@ -16008,6 +17305,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     employees?: EmployeeOrderByRelationAggregateInput
+    companyPurchases?: companyPurchaseOrderByRelationAggregateInput
     _relevance?: StoreOrderByRelevanceInput
   }
 
@@ -16034,6 +17332,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Store"> | Date | string
     updatedAt?: DateTimeFilter<"Store"> | Date | string
     employees?: EmployeeListRelationFilter
+    companyPurchases?: CompanyPurchaseListRelationFilter
   }, "id">
 
   export type StoreOrderByWithAggregationInput = {
@@ -16812,6 +18111,119 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"CustomerPurchaseItem"> | Date | string
   }
 
+  export type companyPurchaseWhereInput = {
+    AND?: companyPurchaseWhereInput | companyPurchaseWhereInput[]
+    OR?: companyPurchaseWhereInput[]
+    NOT?: companyPurchaseWhereInput | companyPurchaseWhereInput[]
+    id?: IntFilter<"companyPurchase"> | number
+    invoiceNumber?: StringFilter<"companyPurchase"> | string
+    supplierName?: StringFilter<"companyPurchase"> | string
+    purchaseDate?: DateTimeFilter<"companyPurchase"> | Date | string
+    receivedDate?: DateTimeNullableFilter<"companyPurchase"> | Date | string | null
+    productName?: StringFilter<"companyPurchase"> | string
+    quantity?: IntFilter<"companyPurchase"> | number
+    unitPrice?: FloatFilter<"companyPurchase"> | number
+    taxAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    discountAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    paymentStatus?: EnumPaymentStatusFilter<"companyPurchase"> | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFilter<"companyPurchase"> | $Enums.PaymentMode
+    remarks?: StringNullableFilter<"companyPurchase"> | string | null
+    storeId?: IntFilter<"companyPurchase"> | number
+    createdAt?: DateTimeFilter<"companyPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"companyPurchase"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }
+
+  export type companyPurchaseOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    supplierName?: SortOrder
+    purchaseDate?: SortOrder
+    receivedDate?: SortOrderInput | SortOrder
+    productName?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrderInput | SortOrder
+    discountAmount?: SortOrderInput | SortOrder
+    paymentStatus?: SortOrder
+    paymentMethod?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    storeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    store?: StoreOrderByWithRelationInput
+    _relevance?: companyPurchaseOrderByRelevanceInput
+  }
+
+  export type companyPurchaseWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    invoiceNumber?: string
+    AND?: companyPurchaseWhereInput | companyPurchaseWhereInput[]
+    OR?: companyPurchaseWhereInput[]
+    NOT?: companyPurchaseWhereInput | companyPurchaseWhereInput[]
+    supplierName?: StringFilter<"companyPurchase"> | string
+    purchaseDate?: DateTimeFilter<"companyPurchase"> | Date | string
+    receivedDate?: DateTimeNullableFilter<"companyPurchase"> | Date | string | null
+    productName?: StringFilter<"companyPurchase"> | string
+    quantity?: IntFilter<"companyPurchase"> | number
+    unitPrice?: FloatFilter<"companyPurchase"> | number
+    taxAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    discountAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    paymentStatus?: EnumPaymentStatusFilter<"companyPurchase"> | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFilter<"companyPurchase"> | $Enums.PaymentMode
+    remarks?: StringNullableFilter<"companyPurchase"> | string | null
+    storeId?: IntFilter<"companyPurchase"> | number
+    createdAt?: DateTimeFilter<"companyPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"companyPurchase"> | Date | string
+    store?: XOR<StoreScalarRelationFilter, StoreWhereInput>
+  }, "id" | "invoiceNumber">
+
+  export type companyPurchaseOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    supplierName?: SortOrder
+    purchaseDate?: SortOrder
+    receivedDate?: SortOrderInput | SortOrder
+    productName?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrderInput | SortOrder
+    discountAmount?: SortOrderInput | SortOrder
+    paymentStatus?: SortOrder
+    paymentMethod?: SortOrder
+    remarks?: SortOrderInput | SortOrder
+    storeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: companyPurchaseCountOrderByAggregateInput
+    _avg?: companyPurchaseAvgOrderByAggregateInput
+    _max?: companyPurchaseMaxOrderByAggregateInput
+    _min?: companyPurchaseMinOrderByAggregateInput
+    _sum?: companyPurchaseSumOrderByAggregateInput
+  }
+
+  export type companyPurchaseScalarWhereWithAggregatesInput = {
+    AND?: companyPurchaseScalarWhereWithAggregatesInput | companyPurchaseScalarWhereWithAggregatesInput[]
+    OR?: companyPurchaseScalarWhereWithAggregatesInput[]
+    NOT?: companyPurchaseScalarWhereWithAggregatesInput | companyPurchaseScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"companyPurchase"> | number
+    invoiceNumber?: StringWithAggregatesFilter<"companyPurchase"> | string
+    supplierName?: StringWithAggregatesFilter<"companyPurchase"> | string
+    purchaseDate?: DateTimeWithAggregatesFilter<"companyPurchase"> | Date | string
+    receivedDate?: DateTimeNullableWithAggregatesFilter<"companyPurchase"> | Date | string | null
+    productName?: StringWithAggregatesFilter<"companyPurchase"> | string
+    quantity?: IntWithAggregatesFilter<"companyPurchase"> | number
+    unitPrice?: FloatWithAggregatesFilter<"companyPurchase"> | number
+    taxAmount?: FloatNullableWithAggregatesFilter<"companyPurchase"> | number | null
+    discountAmount?: FloatNullableWithAggregatesFilter<"companyPurchase"> | number | null
+    paymentStatus?: EnumPaymentStatusWithAggregatesFilter<"companyPurchase"> | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeWithAggregatesFilter<"companyPurchase"> | $Enums.PaymentMode
+    remarks?: StringNullableWithAggregatesFilter<"companyPurchase"> | string | null
+    storeId?: IntWithAggregatesFilter<"companyPurchase"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"companyPurchase"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"companyPurchase"> | Date | string
+  }
+
   export type AdminCreateInput = {
     name: string
     email: string
@@ -17192,6 +18604,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     employees?: EmployeeCreateNestedManyWithoutAccessStoresInput
+    companyPurchases?: companyPurchaseCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateInput = {
@@ -17214,6 +18627,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     employees?: EmployeeUncheckedCreateNestedManyWithoutAccessStoresInput
+    companyPurchases?: companyPurchaseUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUpdateInput = {
@@ -17235,6 +18649,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employees?: EmployeeUpdateManyWithoutAccessStoresNestedInput
+    companyPurchases?: companyPurchaseUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateInput = {
@@ -17257,6 +18672,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     employees?: EmployeeUncheckedUpdateManyWithoutAccessStoresNestedInput
+    companyPurchases?: companyPurchaseUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreCreateManyInput = {
@@ -18083,6 +19499,135 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type companyPurchaseCreateInput = {
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    store: StoreCreateNestedOneWithoutCompanyPurchasesInput
+  }
+
+  export type companyPurchaseUncheckedCreateInput = {
+    id?: number
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    storeId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type companyPurchaseUpdateInput = {
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    store?: StoreUpdateOneRequiredWithoutCompanyPurchasesNestedInput
+  }
+
+  export type companyPurchaseUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    storeId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseCreateManyInput = {
+    id?: number
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    storeId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type companyPurchaseUpdateManyMutationInput = {
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    storeId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -18522,7 +20067,17 @@ export namespace Prisma {
     none?: EmployeeWhereInput
   }
 
+  export type CompanyPurchaseListRelationFilter = {
+    every?: companyPurchaseWhereInput
+    some?: companyPurchaseWhereInput
+    none?: companyPurchaseWhereInput
+  }
+
   export type EmployeeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type companyPurchaseOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -19358,6 +20913,126 @@ export namespace Prisma {
     finalPrice?: SortOrder
   }
 
+  export type EnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[]
+    notIn?: $Enums.PaymentStatus[]
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type EnumPaymentModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMode | EnumPaymentModeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMode[]
+    notIn?: $Enums.PaymentMode[]
+    not?: NestedEnumPaymentModeFilter<$PrismaModel> | $Enums.PaymentMode
+  }
+
+  export type StoreScalarRelationFilter = {
+    is?: StoreWhereInput
+    isNot?: StoreWhereInput
+  }
+
+  export type companyPurchaseOrderByRelevanceInput = {
+    fields: companyPurchaseOrderByRelevanceFieldEnum | companyPurchaseOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type companyPurchaseCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    supplierName?: SortOrder
+    purchaseDate?: SortOrder
+    receivedDate?: SortOrder
+    productName?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrder
+    discountAmount?: SortOrder
+    paymentStatus?: SortOrder
+    paymentMethod?: SortOrder
+    remarks?: SortOrder
+    storeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type companyPurchaseAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrder
+    discountAmount?: SortOrder
+    storeId?: SortOrder
+  }
+
+  export type companyPurchaseMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    supplierName?: SortOrder
+    purchaseDate?: SortOrder
+    receivedDate?: SortOrder
+    productName?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrder
+    discountAmount?: SortOrder
+    paymentStatus?: SortOrder
+    paymentMethod?: SortOrder
+    remarks?: SortOrder
+    storeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type companyPurchaseMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceNumber?: SortOrder
+    supplierName?: SortOrder
+    purchaseDate?: SortOrder
+    receivedDate?: SortOrder
+    productName?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrder
+    discountAmount?: SortOrder
+    paymentStatus?: SortOrder
+    paymentMethod?: SortOrder
+    remarks?: SortOrder
+    storeId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type companyPurchaseSumOrderByAggregateInput = {
+    id?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    taxAmount?: SortOrder
+    discountAmount?: SortOrder
+    storeId?: SortOrder
+  }
+
+  export type EnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[]
+    notIn?: $Enums.PaymentStatus[]
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type EnumPaymentModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMode | EnumPaymentModeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMode[]
+    notIn?: $Enums.PaymentMode[]
+    not?: NestedEnumPaymentModeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentModeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentModeFilter<$PrismaModel>
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -19460,10 +21135,24 @@ export namespace Prisma {
     connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
   }
 
+  export type companyPurchaseCreateNestedManyWithoutStoreInput = {
+    create?: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput> | companyPurchaseCreateWithoutStoreInput[] | companyPurchaseUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: companyPurchaseCreateOrConnectWithoutStoreInput | companyPurchaseCreateOrConnectWithoutStoreInput[]
+    createMany?: companyPurchaseCreateManyStoreInputEnvelope
+    connect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+  }
+
   export type EmployeeUncheckedCreateNestedManyWithoutAccessStoresInput = {
     create?: XOR<EmployeeCreateWithoutAccessStoresInput, EmployeeUncheckedCreateWithoutAccessStoresInput> | EmployeeCreateWithoutAccessStoresInput[] | EmployeeUncheckedCreateWithoutAccessStoresInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutAccessStoresInput | EmployeeCreateOrConnectWithoutAccessStoresInput[]
     connect?: EmployeeWhereUniqueInput | EmployeeWhereUniqueInput[]
+  }
+
+  export type companyPurchaseUncheckedCreateNestedManyWithoutStoreInput = {
+    create?: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput> | companyPurchaseCreateWithoutStoreInput[] | companyPurchaseUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: companyPurchaseCreateOrConnectWithoutStoreInput | companyPurchaseCreateOrConnectWithoutStoreInput[]
+    createMany?: companyPurchaseCreateManyStoreInputEnvelope
+    connect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
   }
 
   export type EnumStoreStatusFieldUpdateOperationsInput = {
@@ -19487,6 +21176,20 @@ export namespace Prisma {
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
   }
 
+  export type companyPurchaseUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput> | companyPurchaseCreateWithoutStoreInput[] | companyPurchaseUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: companyPurchaseCreateOrConnectWithoutStoreInput | companyPurchaseCreateOrConnectWithoutStoreInput[]
+    upsert?: companyPurchaseUpsertWithWhereUniqueWithoutStoreInput | companyPurchaseUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: companyPurchaseCreateManyStoreInputEnvelope
+    set?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    disconnect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    delete?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    connect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    update?: companyPurchaseUpdateWithWhereUniqueWithoutStoreInput | companyPurchaseUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: companyPurchaseUpdateManyWithWhereWithoutStoreInput | companyPurchaseUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: companyPurchaseScalarWhereInput | companyPurchaseScalarWhereInput[]
+  }
+
   export type EmployeeUncheckedUpdateManyWithoutAccessStoresNestedInput = {
     create?: XOR<EmployeeCreateWithoutAccessStoresInput, EmployeeUncheckedCreateWithoutAccessStoresInput> | EmployeeCreateWithoutAccessStoresInput[] | EmployeeUncheckedCreateWithoutAccessStoresInput[]
     connectOrCreate?: EmployeeCreateOrConnectWithoutAccessStoresInput | EmployeeCreateOrConnectWithoutAccessStoresInput[]
@@ -19498,6 +21201,20 @@ export namespace Prisma {
     update?: EmployeeUpdateWithWhereUniqueWithoutAccessStoresInput | EmployeeUpdateWithWhereUniqueWithoutAccessStoresInput[]
     updateMany?: EmployeeUpdateManyWithWhereWithoutAccessStoresInput | EmployeeUpdateManyWithWhereWithoutAccessStoresInput[]
     deleteMany?: EmployeeScalarWhereInput | EmployeeScalarWhereInput[]
+  }
+
+  export type companyPurchaseUncheckedUpdateManyWithoutStoreNestedInput = {
+    create?: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput> | companyPurchaseCreateWithoutStoreInput[] | companyPurchaseUncheckedCreateWithoutStoreInput[]
+    connectOrCreate?: companyPurchaseCreateOrConnectWithoutStoreInput | companyPurchaseCreateOrConnectWithoutStoreInput[]
+    upsert?: companyPurchaseUpsertWithWhereUniqueWithoutStoreInput | companyPurchaseUpsertWithWhereUniqueWithoutStoreInput[]
+    createMany?: companyPurchaseCreateManyStoreInputEnvelope
+    set?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    disconnect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    delete?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    connect?: companyPurchaseWhereUniqueInput | companyPurchaseWhereUniqueInput[]
+    update?: companyPurchaseUpdateWithWhereUniqueWithoutStoreInput | companyPurchaseUpdateWithWhereUniqueWithoutStoreInput[]
+    updateMany?: companyPurchaseUpdateManyWithWhereWithoutStoreInput | companyPurchaseUpdateManyWithWhereWithoutStoreInput[]
+    deleteMany?: companyPurchaseScalarWhereInput | companyPurchaseScalarWhereInput[]
   }
 
   export type PermissionCreateNestedManyWithoutEmployeeRoleInput = {
@@ -20054,6 +21771,28 @@ export namespace Prisma {
     update?: XOR<XOR<CustomerPurchaseUpdateToOneWithWhereWithoutCustomerPurchaseItemInput, CustomerPurchaseUpdateWithoutCustomerPurchaseItemInput>, CustomerPurchaseUncheckedUpdateWithoutCustomerPurchaseItemInput>
   }
 
+  export type StoreCreateNestedOneWithoutCompanyPurchasesInput = {
+    create?: XOR<StoreCreateWithoutCompanyPurchasesInput, StoreUncheckedCreateWithoutCompanyPurchasesInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutCompanyPurchasesInput
+    connect?: StoreWhereUniqueInput
+  }
+
+  export type EnumPaymentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentStatus
+  }
+
+  export type EnumPaymentModeFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentMode
+  }
+
+  export type StoreUpdateOneRequiredWithoutCompanyPurchasesNestedInput = {
+    create?: XOR<StoreCreateWithoutCompanyPurchasesInput, StoreUncheckedCreateWithoutCompanyPurchasesInput>
+    connectOrCreate?: StoreCreateOrConnectWithoutCompanyPurchasesInput
+    upsert?: StoreUpsertWithoutCompanyPurchasesInput
+    connect?: StoreWhereUniqueInput
+    update?: XOR<XOR<StoreUpdateToOneWithWhereWithoutCompanyPurchasesInput, StoreUpdateWithoutCompanyPurchasesInput>, StoreUncheckedUpdateWithoutCompanyPurchasesInput>
+  }
+
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -20444,6 +22183,40 @@ export namespace Prisma {
     _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
+  export type NestedEnumPaymentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[]
+    notIn?: $Enums.PaymentStatus[]
+    not?: NestedEnumPaymentStatusFilter<$PrismaModel> | $Enums.PaymentStatus
+  }
+
+  export type NestedEnumPaymentModeFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMode | EnumPaymentModeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMode[]
+    notIn?: $Enums.PaymentMode[]
+    not?: NestedEnumPaymentModeFilter<$PrismaModel> | $Enums.PaymentMode
+  }
+
+  export type NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentStatus | EnumPaymentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentStatus[]
+    notIn?: $Enums.PaymentStatus[]
+    not?: NestedEnumPaymentStatusWithAggregatesFilter<$PrismaModel> | $Enums.PaymentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
+    _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentModeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMode | EnumPaymentModeFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMode[]
+    notIn?: $Enums.PaymentMode[]
+    not?: NestedEnumPaymentModeWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMode
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentModeFilter<$PrismaModel>
+    _max?: NestedEnumPaymentModeFilter<$PrismaModel>
+  }
+
   export type StoreCreateWithoutEmployeesInput = {
     name: string
     address: string
@@ -20462,6 +22235,7 @@ export namespace Prisma {
     longitude?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    companyPurchases?: companyPurchaseCreateNestedManyWithoutStoreInput
   }
 
   export type StoreUncheckedCreateWithoutEmployeesInput = {
@@ -20483,6 +22257,7 @@ export namespace Prisma {
     longitude?: number | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    companyPurchases?: companyPurchaseUncheckedCreateNestedManyWithoutStoreInput
   }
 
   export type StoreCreateOrConnectWithoutEmployeesInput = {
@@ -20658,6 +22433,51 @@ export namespace Prisma {
     create: XOR<EmployeeCreateWithoutAccessStoresInput, EmployeeUncheckedCreateWithoutAccessStoresInput>
   }
 
+  export type companyPurchaseCreateWithoutStoreInput = {
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type companyPurchaseUncheckedCreateWithoutStoreInput = {
+    id?: number
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type companyPurchaseCreateOrConnectWithoutStoreInput = {
+    where: companyPurchaseWhereUniqueInput
+    create: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput>
+  }
+
+  export type companyPurchaseCreateManyStoreInputEnvelope = {
+    data: companyPurchaseCreateManyStoreInput | companyPurchaseCreateManyStoreInput[]
+    skipDuplicates?: boolean
+  }
+
   export type EmployeeUpsertWithWhereUniqueWithoutAccessStoresInput = {
     where: EmployeeWhereUniqueInput
     update: XOR<EmployeeUpdateWithoutAccessStoresInput, EmployeeUncheckedUpdateWithoutAccessStoresInput>
@@ -20714,6 +22534,44 @@ export namespace Prisma {
     employeeRoleId?: IntFilter<"Employee"> | number
     createdAt?: DateTimeFilter<"Employee"> | Date | string
     updatedAt?: DateTimeFilter<"Employee"> | Date | string
+  }
+
+  export type companyPurchaseUpsertWithWhereUniqueWithoutStoreInput = {
+    where: companyPurchaseWhereUniqueInput
+    update: XOR<companyPurchaseUpdateWithoutStoreInput, companyPurchaseUncheckedUpdateWithoutStoreInput>
+    create: XOR<companyPurchaseCreateWithoutStoreInput, companyPurchaseUncheckedCreateWithoutStoreInput>
+  }
+
+  export type companyPurchaseUpdateWithWhereUniqueWithoutStoreInput = {
+    where: companyPurchaseWhereUniqueInput
+    data: XOR<companyPurchaseUpdateWithoutStoreInput, companyPurchaseUncheckedUpdateWithoutStoreInput>
+  }
+
+  export type companyPurchaseUpdateManyWithWhereWithoutStoreInput = {
+    where: companyPurchaseScalarWhereInput
+    data: XOR<companyPurchaseUpdateManyMutationInput, companyPurchaseUncheckedUpdateManyWithoutStoreInput>
+  }
+
+  export type companyPurchaseScalarWhereInput = {
+    AND?: companyPurchaseScalarWhereInput | companyPurchaseScalarWhereInput[]
+    OR?: companyPurchaseScalarWhereInput[]
+    NOT?: companyPurchaseScalarWhereInput | companyPurchaseScalarWhereInput[]
+    id?: IntFilter<"companyPurchase"> | number
+    invoiceNumber?: StringFilter<"companyPurchase"> | string
+    supplierName?: StringFilter<"companyPurchase"> | string
+    purchaseDate?: DateTimeFilter<"companyPurchase"> | Date | string
+    receivedDate?: DateTimeNullableFilter<"companyPurchase"> | Date | string | null
+    productName?: StringFilter<"companyPurchase"> | string
+    quantity?: IntFilter<"companyPurchase"> | number
+    unitPrice?: FloatFilter<"companyPurchase"> | number
+    taxAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    discountAmount?: FloatNullableFilter<"companyPurchase"> | number | null
+    paymentStatus?: EnumPaymentStatusFilter<"companyPurchase"> | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFilter<"companyPurchase"> | $Enums.PaymentMode
+    remarks?: StringNullableFilter<"companyPurchase"> | string | null
+    storeId?: IntFilter<"companyPurchase"> | number
+    createdAt?: DateTimeFilter<"companyPurchase"> | Date | string
+    updatedAt?: DateTimeFilter<"companyPurchase"> | Date | string
   }
 
   export type PermissionCreateWithoutEmployeeRoleInput = {
@@ -21862,6 +23720,108 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type StoreCreateWithoutCompanyPurchasesInput = {
+    name: string
+    address: string
+    city: string
+    state: string
+    country: string
+    pincode: string
+    contactNumber: string
+    email: string
+    isActive?: boolean
+    isOpen?: boolean
+    isOnlineDeliveryAvailable?: boolean
+    status?: $Enums.StoreStatus
+    type?: $Enums.StoreType
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    employees?: EmployeeCreateNestedManyWithoutAccessStoresInput
+  }
+
+  export type StoreUncheckedCreateWithoutCompanyPurchasesInput = {
+    id?: number
+    name: string
+    address: string
+    city: string
+    state: string
+    country: string
+    pincode: string
+    contactNumber: string
+    email: string
+    isActive?: boolean
+    isOpen?: boolean
+    isOnlineDeliveryAvailable?: boolean
+    status?: $Enums.StoreStatus
+    type?: $Enums.StoreType
+    latitude?: number | null
+    longitude?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    employees?: EmployeeUncheckedCreateNestedManyWithoutAccessStoresInput
+  }
+
+  export type StoreCreateOrConnectWithoutCompanyPurchasesInput = {
+    where: StoreWhereUniqueInput
+    create: XOR<StoreCreateWithoutCompanyPurchasesInput, StoreUncheckedCreateWithoutCompanyPurchasesInput>
+  }
+
+  export type StoreUpsertWithoutCompanyPurchasesInput = {
+    update: XOR<StoreUpdateWithoutCompanyPurchasesInput, StoreUncheckedUpdateWithoutCompanyPurchasesInput>
+    create: XOR<StoreCreateWithoutCompanyPurchasesInput, StoreUncheckedCreateWithoutCompanyPurchasesInput>
+    where?: StoreWhereInput
+  }
+
+  export type StoreUpdateToOneWithWhereWithoutCompanyPurchasesInput = {
+    where?: StoreWhereInput
+    data: XOR<StoreUpdateWithoutCompanyPurchasesInput, StoreUncheckedUpdateWithoutCompanyPurchasesInput>
+  }
+
+  export type StoreUpdateWithoutCompanyPurchasesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    pincode?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    isOnlineDeliveryAvailable?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
+    type?: EnumStoreTypeFieldUpdateOperationsInput | $Enums.StoreType
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    employees?: EmployeeUpdateManyWithoutAccessStoresNestedInput
+  }
+
+  export type StoreUncheckedUpdateWithoutCompanyPurchasesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    address?: StringFieldUpdateOperationsInput | string
+    city?: StringFieldUpdateOperationsInput | string
+    state?: StringFieldUpdateOperationsInput | string
+    country?: StringFieldUpdateOperationsInput | string
+    pincode?: StringFieldUpdateOperationsInput | string
+    contactNumber?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    isOpen?: BoolFieldUpdateOperationsInput | boolean
+    isOnlineDeliveryAvailable?: BoolFieldUpdateOperationsInput | boolean
+    status?: EnumStoreStatusFieldUpdateOperationsInput | $Enums.StoreStatus
+    type?: EnumStoreTypeFieldUpdateOperationsInput | $Enums.StoreType
+    latitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    longitude?: NullableFloatFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    employees?: EmployeeUncheckedUpdateManyWithoutAccessStoresNestedInput
+  }
+
   export type StoreUpdateWithoutEmployeesInput = {
     name?: StringFieldUpdateOperationsInput | string
     address?: StringFieldUpdateOperationsInput | string
@@ -21880,6 +23840,7 @@ export namespace Prisma {
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyPurchases?: companyPurchaseUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateWithoutEmployeesInput = {
@@ -21901,6 +23862,7 @@ export namespace Prisma {
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    companyPurchases?: companyPurchaseUncheckedUpdateManyWithoutStoreNestedInput
   }
 
   export type StoreUncheckedUpdateManyWithoutEmployeesInput = {
@@ -21922,6 +23884,24 @@ export namespace Prisma {
     longitude?: NullableFloatFieldUpdateOperationsInput | number | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseCreateManyStoreInput = {
+    id?: number
+    invoiceNumber: string
+    supplierName: string
+    purchaseDate: Date | string
+    receivedDate?: Date | string | null
+    productName: string
+    quantity: number
+    unitPrice: number
+    taxAmount?: number | null
+    discountAmount?: number | null
+    paymentStatus?: $Enums.PaymentStatus
+    paymentMethod?: $Enums.PaymentMode
+    remarks?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type EmployeeUpdateWithoutAccessStoresInput = {
@@ -22036,6 +24016,59 @@ export namespace Prisma {
     hireDate?: DateTimeFieldUpdateOperationsInput | Date | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     employeeRoleId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseUpdateWithoutStoreInput = {
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseUncheckedUpdateWithoutStoreInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type companyPurchaseUncheckedUpdateManyWithoutStoreInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    invoiceNumber?: StringFieldUpdateOperationsInput | string
+    supplierName?: StringFieldUpdateOperationsInput | string
+    purchaseDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    receivedDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    productName?: StringFieldUpdateOperationsInput | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    discountAmount?: NullableFloatFieldUpdateOperationsInput | number | null
+    paymentStatus?: EnumPaymentStatusFieldUpdateOperationsInput | $Enums.PaymentStatus
+    paymentMethod?: EnumPaymentModeFieldUpdateOperationsInput | $Enums.PaymentMode
+    remarks?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
